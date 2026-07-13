@@ -13,6 +13,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "shots.mjs",
     "probe-map.mjs",
+    // Tooling scripts, not part of the Next app (k6 runtime, own globals).
+    "audit/**",
+    "scripts/**",
   ]),
   {
     rules: {
