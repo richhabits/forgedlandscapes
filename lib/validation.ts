@@ -30,6 +30,7 @@ export const leadSchema = z.object({
   timeline: z.enum(timelineValues).default("exploring"),
   message: z.string().trim().max(2000).optional().or(z.literal("")),
   source: z.enum(["assessor", "assessor_ai", "form", "radius_widget"]).default("form"),
+  referred_by: z.string().trim().max(254).optional().or(z.literal("")),
   consent: z.literal(true, { error: "Please confirm you're happy for us to contact you" }),
   transcript: z
     .array(

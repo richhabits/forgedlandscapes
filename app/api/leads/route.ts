@@ -56,12 +56,19 @@ export async function POST(req: Request) {
     source: lead.source,
     status: in_area === false ? "out_of_area" : "new",
     transcript: lead.transcript ?? null,
+    referred_by: lead.referred_by ? lead.referred_by.toLowerCase().trim() : null,
   };
 
   let stored = false;
   const supabase = getServerSupabase();
   if (supabase) {
-    const { error } = await supabase.from("leads").insert(record);
+    let { error } = await supabase.from("leads").insert(record);
+    if (error) {
+      // referred_by column may not exist yet (migration 0005) — retry without it.
+      const { referred_by: _rb, ...base } = record;
+      void _rb;
+      ({ error } = await supabase.from("leads").insert(base));
+    }
     if (error) {
       console.error("[leads] insert failed:", error.message);
     } else {

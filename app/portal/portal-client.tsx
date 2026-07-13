@@ -6,6 +6,7 @@ import type { Session, SupabaseClient } from "@supabase/supabase-js";
 import { getBrowserSupabase, supabaseConfigured } from "@/lib/supabase";
 import { BriefWizard } from "@/components/portal/brief-wizard";
 import { ProjectMessages } from "@/components/portal/project-messages";
+import { ReferPanel } from "@/components/portal/refer-panel";
 import { Button } from "@/components/ui/button";
 
 type Stage =
@@ -181,6 +182,7 @@ export function PortalClient() {
         </button>
       </div>
       <ProjectMessages client={stage.client} user={stage.session.user} />
+      {stage.session.user.email && <ReferPanel email={stage.session.user.email} />}
       <BriefWizard
         backend={{ mode: "real", client: stage.client, user: stage.session.user }}
         initialEmail={stage.session.user.email || undefined}

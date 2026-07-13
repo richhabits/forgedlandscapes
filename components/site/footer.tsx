@@ -84,6 +84,7 @@ export function Footer() {
             are indicative; fixed quotations follow a site survey.
           </p>
           <div className="flex gap-5 text-[12px] text-stone-400 shrink-0">
+            <Link href="/work" className="hover:text-bone-100 transition-colors">Our work</Link>
             <Link href="/guides" className="hover:text-bone-100 transition-colors">Guides</Link>
             <Link href="/privacy" className="hover:text-bone-100 transition-colors">Privacy &amp; cookies</Link>
             <Link href="/terms" className="hover:text-bone-100 transition-colors">Terms</Link>

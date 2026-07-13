@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Phone, Mail, Plus, Send } from "lucide-react";
+import { Phone, Plus, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { StaffRow, TeamMessage } from "@/lib/admin-data";
 import {
@@ -233,6 +233,23 @@ function StaffEditor({
   });
   const [busy, setBusy] = useState(false);
   const [flash, setFlash] = useState<string | null>(null);
+  const [adminFlash, setAdminFlash] = useState<string | null>(null);
+
+  async function adminAccess(action: "add" | "remove") {
+    if (isDemo) return setAdminFlash("Demo mode — not saved.");
+    if (!f.email.trim()) return;
+    setAdminFlash("Working…");
+    const res = await fetch("/api/admin/team-admin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: f.email.trim(), action }),
+    });
+    const j = await res.json().catch(() => null);
+    if (!res.ok) setAdminFlash("Couldn't update — try again.");
+    else if (action === "add" && j?.found === false)
+      setAdminFlash("No account yet — ask them to sign in at /admin once, then grant.");
+    else setAdminFlash(action === "add" ? "Admin access granted." : "Admin access revoked.");
+  }
 
   async function save() {
     if (!f.name.trim()) return;
@@ -282,6 +299,20 @@ function StaffEditor({
             Active (shows on the status board)
           </label>
         </div>
+
+        {staff && f.email.trim() && (
+          <div className="mt-5 pt-4 border-t rule">
+            <p className="microlabel mb-1.5">Back-office login</p>
+            <p className="text-[11.5px] text-stone-500 mb-3 leading-relaxed">
+              Give this person their own admin access. They must sign in at <span className="text-stone-300">/admin</span> with {f.email.trim()} once first, then grant.
+            </p>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline" onClick={() => adminAccess("add")}>Grant admin</Button>
+              <Button size="sm" variant="ghost" onClick={() => adminAccess("remove")}>Revoke</Button>
+            </div>
+            {adminFlash && <p className="mt-2 text-[12px] text-stone-400">{adminFlash}</p>}
+          </div>
+        )}
         <div className="mt-6 flex items-center gap-3">
           <Button size="sm" disabled={busy || !f.name.trim()} onClick={save}>{busy ? "Saving…" : "Save"}</Button>
           <Button size="sm" variant="ghost" onClick={onClose}>Cancel</Button>

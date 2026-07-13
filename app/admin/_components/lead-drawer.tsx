@@ -151,6 +151,9 @@ export function LeadDrawer({
               <Row k="Project">{label(PROJECT_TYPE_LABELS, detail.project_type)}</Row>
               <Row k="Budget">{label(BUDGET_LABELS, detail.budget_band)}</Row>
               <Row k="Timeline">{label(TIMELINE_LABELS, detail.timeline)}</Row>
+              {detail.referred_by && (
+                <Row k="Referred by"><span className="text-brass-300">{detail.referred_by}</span></Row>
+              )}
               {detail.message && <Row k="Message"><span className="text-bone-100/90 leading-relaxed">{detail.message}</span></Row>}
             </dl>
 

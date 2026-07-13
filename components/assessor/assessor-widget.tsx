@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { MessageSquareText, X, ArrowUpRight, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -32,7 +31,6 @@ type LeadData = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function AssessorWidget() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("unknown");
   const [messages, setMessages] = useState<Msg[]>([]);

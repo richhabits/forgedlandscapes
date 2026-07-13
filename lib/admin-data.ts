@@ -33,6 +33,16 @@ export type LeadRow = {
   status: string;
   user_id: string | null;
   assigned_to: string | null;
+  referred_by?: string | null;
+  is_sample?: boolean;
+};
+
+export type AppSetting = {
+  key: string;
+  value: string | null;
+  label: string | null;
+  is_secret: boolean;
+  updated_at: string;
 };
 
 export type StaffRow = {
@@ -142,7 +152,7 @@ export type AdminMetrics = {
 // migration is applied never breaks the existing lead inbox.
 const LEAD_COLS_BASE =
   "id,created_at,email,name,phone,postcode,in_area,distance_miles,project_type,budget_band,timeline,message,source,status,user_id";
-const LEAD_COLS = `${LEAD_COLS_BASE},assigned_to`;
+const LEAD_COLS = `${LEAD_COLS_BASE},assigned_to,referred_by,is_sample`;
 
 function withAssigned(rows: Partial<LeadRow>[] | null): LeadRow[] {
   return (rows ?? []).map((l) => ({ assigned_to: null, ...l }) as LeadRow);
@@ -361,6 +371,28 @@ export async function listTeamMessages(limit = 100): Promise<TeamMessage[]> {
     .order("created_at", { ascending: false })
     .limit(limit);
   return (data as TeamMessage[] | null) ?? [];
+}
+
+export async function listSettings(): Promise<AppSetting[]> {
+  if (!supabaseConfigured()) return [];
+  const supabase = await createServerSupabase();
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from("app_settings")
+    .select("key,value,label,is_secret,updated_at")
+    .order("key", { ascending: true });
+  return (data as AppSetting[] | null) ?? [];
+}
+
+export async function countSampleData(): Promise<number> {
+  if (!supabaseConfigured()) return 0;
+  const supabase = await createServerSupabase();
+  if (!supabase) return 0;
+  const { count } = await supabase
+    .from("leads")
+    .select("id", { count: "exact", head: true })
+    .eq("is_sample", true);
+  return count ?? 0;
 }
 
 export async function getProjectMessages(projectId: string): Promise<ProjectMessage[]> {

@@ -88,13 +88,13 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
 
       {/* photos & video */}
       <Section title={`Photos & video (${photos.length})`}>
-        <MediaGallery media={photos} title="Photos" />
+        <MediaGallery media={photos} />
       </Section>
 
       {/* sketches */}
       {sketches.length > 0 && (
         <Section title={`Layout sketches (${sketches.length})`}>
-          <MediaGallery media={sketches} title="Sketches" />
+          <MediaGallery media={sketches} />
         </Section>
       )}
 
@@ -117,7 +117,7 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
             ))}
           </ul>
         )}
-        {inspo.length > 0 && <MediaGallery media={inspo} title="Inspiration" />}
+        {inspo.length > 0 && <MediaGallery media={inspo} />}
         {p.inspirationLinks.length === 0 && inspo.length === 0 && (
           <p className="text-[13px] text-stone-500">None provided.</p>
         )}

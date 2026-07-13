@@ -32,6 +32,10 @@ export function ContactForm() {
       message: String(fd.get("message") || ""),
       consent: fd.get("consent") === "on",
       source: "form",
+      referred_by:
+        typeof window !== "undefined"
+          ? new URLSearchParams(window.location.search).get("ref") || ""
+          : "",
       company: String(fd.get("company") || ""), // honeypot
     };
 

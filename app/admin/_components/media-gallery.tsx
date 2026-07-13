@@ -9,7 +9,7 @@ import { MEDIA_KIND_LABELS } from "@/lib/labels";
 const isVideo = (m: MediaView) => m.kind === "garden_video";
 const src = (m: MediaView) => m.signedUrl || m.externalUrl || "";
 
-export function MediaGallery({ media, title }: { media: MediaView[]; title: string }) {
+export function MediaGallery({ media }: { media: MediaView[] }) {
   const [open, setOpen] = useState<number | null>(null);
 
   if (media.length === 0) {
