@@ -14,6 +14,7 @@ import {
 } from "@/lib/assessor";
 import { buttonClass } from "@/components/ui/button";
 import { trackEvent, EVENTS } from "@/lib/analytics";
+import { collectAttribution } from "@/lib/attribution";
 
 type Msg = { role: "user" | "assistant"; content: string };
 type Mode = "ai" | "scripted" | "unknown";
@@ -113,6 +114,7 @@ export function AssessorWidget() {
           source: mode === "ai" ? "assessor_ai" : "assessor",
           consent: true,
           transcript: transcript.slice(-40),
+          attribution: collectAttribution(),
           company: "",
         }),
       });

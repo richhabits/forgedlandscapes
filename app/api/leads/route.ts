@@ -57,6 +57,7 @@ export async function POST(req: Request) {
     status: in_area === false ? "out_of_area" : "new",
     transcript: lead.transcript ?? null,
     referred_by: lead.referred_by ? lead.referred_by.toLowerCase().trim() : null,
+    meta: lead.attribution && Object.keys(lead.attribution).length ? lead.attribution : {},
   };
 
   let stored = false;

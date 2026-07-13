@@ -6,6 +6,7 @@ import { projectTypeOptions, budgetOptions, timelineOptions } from "@/lib/servic
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent, EVENTS } from "@/lib/analytics";
+import { collectAttribution } from "@/lib/attribution";
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -36,6 +37,7 @@ export function ContactForm() {
         typeof window !== "undefined"
           ? new URLSearchParams(window.location.search).get("ref") || ""
           : "",
+      attribution: collectAttribution(),
       company: String(fd.get("company") || ""), // honeypot
     };
 
