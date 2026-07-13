@@ -6,7 +6,8 @@ import { ShareButton } from "@/components/site/share-button";
 import { buttonClass } from "@/components/ui/button";
 import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 
-export const dynamic = "force-dynamic";
+// ISR: rebuild at most every 5 min instead of SSR on every request.
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Our work — before & after",

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { leadSchema } from "@/lib/validation";
 import { checkServiceArea } from "@/lib/geo";
 import { getServerSupabase } from "@/lib/supabase";
-import { sendAdminLeadAlert } from "@/lib/email";
+import { sendAdminLeadAlert, sendClientLeadAck } from "@/lib/email";
 import { hit, clientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -78,7 +78,9 @@ export async function POST(req: Request) {
     console.log("[leads] preview mode — lead not persisted:", record.email);
   }
 
+  // Notify staff (speed-to-lead) AND acknowledge the customer instantly.
   sendAdminLeadAlert(record).catch(() => {});
+  sendClientLeadAck(record.email, { name: record.name, in_area }).catch(() => {});
 
   return NextResponse.json({
     ok: true,
