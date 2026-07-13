@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Send } from "lucide-react";
+import { Send, Video } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ProjectMessage } from "@/lib/admin-data";
 import { timeAgo } from "@/lib/labels";
+import { newVideoRoom } from "@/lib/call";
 import { Button } from "@/components/ui/button";
 
 /** Admin side of the client conversation — reads the thread and replies as the team. */
@@ -39,6 +40,15 @@ export function ProjectThread({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  async function postBody(text: string) {
+    const res = await fetch("/api/admin/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kind: "project", project_id: projectId, body: text }),
+    });
+    return res.ok;
+  }
+
   async function send() {
     if (!body.trim()) return;
     if (isDemo) {
@@ -46,16 +56,22 @@ export function ProjectThread({
       return;
     }
     setBusy(true);
-    const res = await fetch("/api/admin/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ kind: "project", project_id: projectId, body: body.trim() }),
-    });
+    const ok = await postBody(body.trim());
     setBusy(false);
-    if (res.ok) {
+    if (ok) {
       setBody("");
       router.refresh();
     }
+  }
+
+  async function startCall() {
+    const url = newVideoRoom();
+    window.open(url, "_blank", "noopener");
+    if (isDemo) return;
+    setBusy(true);
+    const ok = await postBody(`📹 I've started a video call — join here (no app needed): ${url}`);
+    setBusy(false);
+    if (ok) router.refresh();
   }
 
   return (
@@ -84,17 +100,26 @@ export function ProjectThread({
           ))
         )}
       </div>
-      <div className="border-t rule p-3 flex gap-2">
-        <input
-          className="field flex-1"
-          placeholder={`Reply to ${clientName ? clientName.split(" ")[0] : "the client"}…`}
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
-        />
-        <Button size="md" disabled={busy || !body.trim()} onClick={send} aria-label="Send">
-          <Send className="size-4" />
-        </Button>
+      <div className="border-t rule p-3 space-y-2">
+        <div className="flex gap-2">
+          <input
+            className="field flex-1"
+            placeholder={`Reply to ${clientName ? clientName.split(" ")[0] : "the client"}…`}
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
+          />
+          <Button size="md" disabled={busy || !body.trim()} onClick={send} aria-label="Send">
+            <Send className="size-4" />
+          </Button>
+        </div>
+        <button
+          onClick={startCall}
+          disabled={busy}
+          className="flex items-center gap-1.5 text-[12px] text-stone-400 hover:text-brass-300 transition-colors cursor-pointer"
+        >
+          <Video className="size-3.5" /> Start a video call (free, sends the client a join link)
+        </button>
       </div>
     </div>
   );

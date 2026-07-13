@@ -4,7 +4,6 @@ import type {
   LeadEvent,
   ProjectDetail,
   AdminMetrics,
-  MediaView,
   StaffRow,
   PartnerRow,
 } from "@/lib/admin-data";
@@ -187,5 +186,3 @@ export const demoMetrics: AdminMetrics = {
   assessor_converted_total: 2,
   median_lead_to_action_seconds: 5 * 3600,
 };
-
-export const demoMedia: MediaView[] = []; // unused placeholder kept for symmetry

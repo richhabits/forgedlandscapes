@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { X, Phone, Mail, ArrowRight, ExternalLink } from "lucide-react";
+import { X, Phone, Mail, ArrowRight, ExternalLink, Video } from "lucide-react";
+import { newVideoRoom } from "@/lib/call";
 import { cn } from "@/lib/utils";
 import type { LeadDetail, StaffRow } from "@/lib/admin-data";
 import {
@@ -124,6 +125,12 @@ export function LeadDrawer({
               <a href={`mailto:${detail.email}`} className="flex items-center gap-2 h-9 px-3 rounded-[2px] border rule text-stone-300 text-[12px] font-semibold uppercase tracking-[0.08em] hover:border-bone-100/35 transition-colors">
                 <Mail className="size-3.5" /> Email
               </a>
+              <button
+                onClick={() => window.open(newVideoRoom(), "_blank", "noopener")}
+                className="flex items-center gap-2 h-9 px-3 rounded-[2px] border rule text-stone-300 text-[12px] font-semibold uppercase tracking-[0.08em] hover:border-bone-100/35 transition-colors cursor-pointer"
+              >
+                <Video className="size-3.5" /> Video
+              </button>
               {detail.project && (
                 <Link href={`/admin/projects/${detail.project.id}`} className="flex items-center gap-2 h-9 px-3 rounded-[2px] border rule text-stone-300 text-[12px] font-semibold uppercase tracking-[0.08em] hover:border-bone-100/35 transition-colors">
                   View brief <ArrowRight className="size-3.5" />
