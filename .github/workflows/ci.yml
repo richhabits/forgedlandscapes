@@ -1,0 +1,37 @@
+name: CI
+
+# Quality gate: build + typecheck + lint must pass before anything reaches main.
+on:
+  push:
+    branches: [main, "audit/**"]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: build · typecheck · lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install (clean, from lockfile)
+        run: npm ci
+
+      - name: Lint (zero warnings enforced)
+        run: npm run lint -- --max-warnings 0
+
+      - name: Build + typecheck
+        run: npm run build
+        env:
+          # Public placeholders so the build never depends on real secrets in CI.
+          NEXT_PUBLIC_SITE_URL: https://www.forgedlandscapes.co.uk

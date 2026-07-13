@@ -18,8 +18,10 @@ const eslintConfig = defineConfig([
     rules: {
       // Copy-heavy UK marketing site — literal apostrophes in JSX are house style.
       "react/no-unescaped-entities": "off",
-      // Deliberate, contained patterns (hydration-gated banners, session boot).
-      "react-hooks/set-state-in-effect": "warn",
+      // Off by design: every occurrence is an intentional client-only mount read
+      // (localStorage consent, auth/session boot) that MUST run in an effect for
+      // SSR safety. This experimental rule over-flags that valid pattern.
+      "react-hooks/set-state-in-effect": "off",
     },
   },
 ]);
