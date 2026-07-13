@@ -150,7 +150,7 @@ grant select on public.admin_metrics to authenticated;
 -- run this once in the Supabase SQL editor, swapping the email:
 --
 --   insert into public.admins (user_id)
---   select id from auth.users where lower(email) = lower('richhabitslondon@gmail.com')
+--   select id from auth.users where lower(email) = lower('forgedlandscapes@gmail.com')
 --   on conflict (user_id) do nothing;
 --
 -- To revoke:  delete from public.admins where user_id = (

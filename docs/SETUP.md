@@ -50,7 +50,7 @@ redirects non-admins, and Row Level Security independently returns them no data.
 2. Supabase → **SQL Editor** → run, swapping the email:
    ```sql
    insert into public.admins (user_id)
-   select id from auth.users where lower(email) = lower('richhabitslondon@gmail.com')
+   select id from auth.users where lower(email) = lower('forgedlandscapes@gmail.com')
    on conflict (user_id) do nothing;
    ```
 3. Reload `/admin` — you're in. See `docs/ADMIN-GUIDE.md` for day-to-day use.
@@ -72,10 +72,12 @@ To add another admin later, repeat step 2 with their email. To revoke:
 
 ## 6 · Before real traffic
 
-- `lib/site-config.ts`: real phone number, email, waste-carrier CBDU number,
-  insurer confirmation — every `TODO` is marked.
-- Badges: replace typographic placeholders in `components/site/badges.tsx`
-  with licensed logo files **only for bodies you've actually joined**.
+- `lib/site-config.ts`: phone + email are set. Add back `trust.insurance` and
+  `trust.wasteCarrier` (with a real CBDU number) **only once actually held** — a
+  commented template marks where. Registering as an EA waste carrier and holding
+  public liability insurance are both worth sorting before trading.
+- Badges: `site-config.ts` `badges` is empty (none held). Add an entry **only for
+  a body you've actually joined**, with its licensed logo in `/public/badges`.
 - Testimonials in `app/(marketing)/page.tsx`: swap placeholders for real reviews.
 - Photography: work through `docs/SHOT-LIST.md` and update `lib/images.ts`.
 - Legal: drop the registered company name/number into `/privacy` and `/terms`
