@@ -9,7 +9,7 @@ import { SiteImg } from "@/components/site/site-image";
 import { Reveal } from "@/components/site/reveal";
 import { RadiusChecker } from "@/components/site/radius-checker";
 import { buttonClass } from "@/components/ui/button";
-import { JsonLd } from "@/lib/jsonld";
+import { JsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
   return areas.map((a) => ({ slug: a.slug }));
@@ -42,14 +42,23 @@ export default async function AreaPage({
   return (
     <div className="pt-36 pb-24">
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: `Landscaping in ${a.name}`,
-          provider: { "@id": `${site.url}/#business` },
-          areaServed: { "@type": "City", name: a.name },
-          serviceType: "Landscaping design and build",
-        }}
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: `Landscaping in ${a.name}`,
+            description: `Design-and-build landscaping in ${a.name} (${a.postcodeHint}) — patios, driveways, decking, lawns and full garden redesigns.`,
+            url: `${site.url}/areas/${a.slug}`,
+            provider: { "@id": `${site.url}/#business` },
+            areaServed: { "@type": "City", name: a.name },
+            serviceType: "Landscaping design and build",
+          },
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Areas", path: "/areas" },
+            { name: a.name, path: `/areas/${a.slug}` },
+          ]),
+        ]}
       />
       <section className="mx-auto max-w-7xl px-5 md:px-10 grid gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">

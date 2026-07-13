@@ -73,6 +73,20 @@ export function serviceJsonLd(service: Service) {
   };
 }
 
+/** Breadcrumb trail — drives the breadcrumb rich result in Google. */
+export function breadcrumbJsonLd(trail: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((t, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: t.name,
+      item: `${site.url}${t.path}`,
+    })),
+  };
+}
+
 export function faqJsonLd(faqs: { q: string; a: string }[]) {
   return {
     "@context": "https://schema.org",

@@ -10,7 +10,7 @@ import { FaqList } from "@/components/site/faq";
 import { SudsCalculator } from "@/components/site/suds-calculator";
 import { BeforeAfter } from "@/components/site/before-after";
 import { buttonClass } from "@/components/ui/button";
-import { serviceJsonLd, faqJsonLd, JsonLd } from "@/lib/jsonld";
+import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 import { site } from "@/lib/site-config";
 
 /** Shared scenario-page template — layout consistent, content per service. */
@@ -22,7 +22,16 @@ export function ServicePage({ slug }: { slug: string }) {
 
   return (
     <>
-      <JsonLd data={[serviceJsonLd(s), faqJsonLd(s.faqs)]} />
+      <JsonLd
+        data={[
+          serviceJsonLd(s),
+          faqJsonLd(s.faqs),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: s.title, path: `/${s.slug}` },
+          ]),
+        ]}
+      />
 
       {/* hero */}
       <section className="relative min-h-[62svh] flex items-end overflow-hidden">
