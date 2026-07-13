@@ -96,6 +96,42 @@ export const MEDIA_KIND_LABELS: Record<string, string> = {
   inspiration: "Inspiration",
 };
 
+export const STAFF_ROLE_LABELS: Record<string, string> = {
+  owner: "Owner",
+  manager: "Manager",
+  staff: "Staff",
+  crew: "Crew",
+  office: "Office",
+};
+
+export const STAFF_ROLES = ["owner", "manager", "staff", "crew", "office"] as const;
+
+// Plain-English status for the "where's everyone" board — no jargon.
+export const STAFF_STATUS_LABELS: Record<string, string> = {
+  available: "Available",
+  en_route: "On the way",
+  on_site: "On site",
+  off: "Off",
+};
+
+export const STAFF_STATUSES = ["available", "en_route", "on_site", "off"] as const;
+
+export function staffStatusTone(s: string): "go" | "moving" | "onsite" | "off" {
+  if (s === "available") return "go";
+  if (s === "en_route") return "moving";
+  if (s === "on_site") return "onsite";
+  return "off";
+}
+
+export const PARTNER_KIND_LABELS: Record<string, string> = {
+  subcontractor: "Subcontractor",
+  supplier: "Supplier",
+  referrer: "Referral partner",
+  other: "Other",
+};
+
+export const PARTNER_KINDS = ["subcontractor", "supplier", "referrer", "other"] as const;
+
 export function label(map: Record<string, string>, key: string | null | undefined): string {
   if (!key) return "—";
   return map[key] ?? key.replace(/_/g, " ");

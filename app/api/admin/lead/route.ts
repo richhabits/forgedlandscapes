@@ -18,6 +18,7 @@ const postSchema = z.object({
   status: z.enum(LEAD_STATUSES).optional(),
   note: z.string().max(2000).optional(),
   reply: z.enum(["book_call", "survey_slots", "out_of_area"]).optional(),
+  assigned_to: z.string().max(64).nullable().optional(), // staff id, or null to unassign
 });
 
 /** GET ?id=… — full lead detail for the drawer (admin only, RLS-backed).
@@ -46,8 +47,20 @@ export async function POST(req: Request) {
 
   const parsed = postSchema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ ok: false }, { status: 400 });
-  const { leadId, status, note, reply } = parsed.data;
+  const { leadId, status, note, reply, assigned_to } = parsed.data;
   const { supabase, email: actor } = admin;
+
+  // Assignment → update owner + audit event.
+  if (assigned_to !== undefined) {
+    const { error } = await supabase.from("leads").update({ assigned_to }).eq("id", leadId);
+    if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    let who = "Unassigned";
+    if (assigned_to) {
+      const { data: s } = await supabase.from("staff").select("name").eq("id", assigned_to).maybeSingle();
+      who = `Assigned to ${s?.name ?? "staff"}`;
+    }
+    await supabase.from("lead_events").insert({ lead_id: leadId, kind: "assign", note: who, actor });
+  }
 
   // Status advance → update + audit event.
   if (status) {

@@ -5,6 +5,8 @@ import type {
   ProjectDetail,
   AdminMetrics,
   MediaView,
+  StaffRow,
+  PartnerRow,
 } from "@/lib/admin-data";
 
 /**
@@ -17,7 +19,7 @@ const H = 3600_000;
 const D = 24 * H;
 const ago = (ms: number) => new Date(Date.now() - ms).toISOString();
 
-export const demoLeads: LeadRow[] = [
+const demoLeadsBase: Omit<LeadRow, "assigned_to">[] = [
   {
     id: "demo-1", created_at: ago(0.4 * H), email: "harriet.doyle@example.co.uk",
     name: "Harriet Doyle", phone: "07700 900123", postcode: "WD17 3AB",
@@ -81,6 +83,31 @@ export const demoLeads: LeadRow[] = [
     message: "Porcelain terrace with steps down to a lower lawn — went ahead, thank you.",
     source: "assessor_ai", status: "won", user_id: "user-tom",
   },
+];
+
+export const demoStaff: StaffRow[] = [
+  { id: "staff-rob", name: "Rob Ellison", role: "owner", email: "rob@example.co.uk", phone: "07700 900001", active: true, status: "available", status_note: null, status_at: ago(0.5 * H), notes: "Founder — surveys & quotes.", created_at: ago(90 * D) },
+  { id: "staff-danny", name: "Danny Cole", role: "crew", email: null, phone: "07700 900002", active: true, status: "en_route", status_note: "Heading to WD17 patio", status_at: ago(0.3 * H), notes: null, created_at: ago(60 * D) },
+  { id: "staff-mike", name: "Mike Farrow", role: "crew", email: null, phone: "07700 900003", active: true, status: "on_site", status_note: "WD3 deck build — day 2", status_at: ago(2 * H), notes: null, created_at: ago(60 * D) },
+  { id: "staff-aisha", name: "Aisha Khan", role: "office", email: "aisha@example.co.uk", phone: "07700 900004", active: true, status: "available", status_note: null, status_at: ago(1 * H), notes: "Bookings & client care.", created_at: ago(45 * D) },
+];
+
+const LEAD_ASSIGN: Record<string, string> = {
+  "demo-3": "staff-danny",
+  "demo-7": "staff-aisha",
+  "demo-8": "staff-rob",
+};
+
+export const demoLeads: LeadRow[] = demoLeadsBase.map((l) => ({
+  ...l,
+  assigned_to: LEAD_ASSIGN[l.id] ?? null,
+}));
+
+export const demoPartners: PartnerRow[] = [
+  { id: "p1", name: "Tom Beck", company: "Beck Groundworks Ltd", kind: "subcontractor", trade: "Groundworks & drainage", email: "tom@beckgroundworks.example", phone: "07700 900101", active: true, notes: "Reliable digger crew, good on clay sites.", created_at: ago(120 * D) },
+  { id: "p2", name: "Hertfordshire Stone Co.", company: "Herts Stone", kind: "supplier", trade: "Porcelain & natural stone", email: "sales@hertsstone.example", phone: "01923 900200", active: true, notes: "Trade account — samples next-day.", created_at: ago(120 * D) },
+  { id: "p3", name: "Priya Nair", company: "Nair Electrical", kind: "subcontractor", trade: "Garden lighting & power (Part P)", email: null, phone: "07700 900102", active: true, notes: "Part P certified for outdoor circuits.", created_at: ago(80 * D) },
+  { id: "p4", name: "Studio Verde", company: "Studio Verde Architects", kind: "referrer", trade: "Architect — sends garden projects", email: "hello@studioverde.example", phone: null, active: true, notes: "Referred the Radlett job. Thank-you due.", created_at: ago(200 * D) },
 ];
 
 const demoEvents: Record<string, LeadEvent[]> = {

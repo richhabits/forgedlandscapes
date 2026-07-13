@@ -5,6 +5,8 @@ import {
   demoLeadDetail,
   demoProjectDetail,
   demoMetrics,
+  demoStaff,
+  demoPartners,
 } from "@/lib/admin-demo";
 
 /**
@@ -30,6 +32,51 @@ export type LeadRow = {
   source: string;
   status: string;
   user_id: string | null;
+  assigned_to: string | null;
+};
+
+export type StaffRow = {
+  id: string;
+  name: string;
+  role: string;
+  email: string | null;
+  phone: string | null;
+  active: boolean;
+  status: string;
+  status_note: string | null;
+  status_at: string;
+  notes: string | null;
+  created_at: string;
+};
+
+export type TeamMessage = {
+  id: string;
+  author: string;
+  body: string;
+  lead_id: string | null;
+  created_at: string;
+};
+
+export type ProjectMessage = {
+  id: string;
+  project_id: string;
+  sender_role: "client" | "team";
+  author_name: string | null;
+  body: string;
+  created_at: string;
+};
+
+export type PartnerRow = {
+  id: string;
+  name: string;
+  company: string | null;
+  kind: string;
+  trade: string | null;
+  email: string | null;
+  phone: string | null;
+  active: boolean;
+  notes: string | null;
+  created_at: string;
 };
 
 export type LeadEvent = {
@@ -91,7 +138,7 @@ export type AdminMetrics = {
 };
 
 const LEAD_COLS =
-  "id,created_at,email,name,phone,postcode,in_area,distance_miles,project_type,budget_band,timeline,message,source,status,user_id";
+  "id,created_at,email,name,phone,postcode,in_area,distance_miles,project_type,budget_band,timeline,message,source,status,user_id,assigned_to";
 
 export async function listLeads(): Promise<LeadRow[]> {
   if (!supabaseConfigured()) return demoLeads;
@@ -251,4 +298,55 @@ export async function getMetrics(): Promise<AdminMetrics> {
     };
   }
   return data as AdminMetrics;
+}
+
+const STAFF_COLS = "id,name,role,email,phone,active,status,status_note,status_at,notes,created_at";
+const PARTNER_COLS = "id,name,company,kind,trade,email,phone,active,notes,created_at";
+
+export async function listStaff(): Promise<StaffRow[]> {
+  if (!supabaseConfigured()) return demoStaff;
+  const supabase = await createServerSupabase();
+  if (!supabase) return demoStaff;
+  const { data } = await supabase
+    .from("staff")
+    .select(STAFF_COLS)
+    .order("active", { ascending: false })
+    .order("name", { ascending: true });
+  return (data as StaffRow[] | null) ?? [];
+}
+
+export async function listPartners(): Promise<PartnerRow[]> {
+  if (!supabaseConfigured()) return demoPartners;
+  const supabase = await createServerSupabase();
+  if (!supabase) return demoPartners;
+  const { data } = await supabase
+    .from("partners")
+    .select(PARTNER_COLS)
+    .order("active", { ascending: false })
+    .order("name", { ascending: true });
+  return (data as PartnerRow[] | null) ?? [];
+}
+
+export async function listTeamMessages(limit = 100): Promise<TeamMessage[]> {
+  if (!supabaseConfigured()) return [];
+  const supabase = await createServerSupabase();
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from("team_messages")
+    .select("id,author,body,lead_id,created_at")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  return (data as TeamMessage[] | null) ?? [];
+}
+
+export async function getProjectMessages(projectId: string): Promise<ProjectMessage[]> {
+  if (!supabaseConfigured()) return [];
+  const supabase = await createServerSupabase();
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from("project_messages")
+    .select("id,project_id,sender_role,author_name,body,created_at")
+    .eq("project_id", projectId)
+    .order("created_at", { ascending: true });
+  return (data as ProjectMessage[] | null) ?? [];
 }

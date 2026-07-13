@@ -20,11 +20,15 @@ export default async function ConsoleLayout({ children }: { children: React.Reac
     <div className="min-h-dvh grain">
       <header className="sticky top-0 z-20 border-b rule bg-forge-950/85 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-5 md:px-8 h-14 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <Link href="/admin" className="font-display text-[17px] text-bone-50 leading-none">
               Forged <span className="display-italic text-brass-300">Admin</span>
             </Link>
-            <span className="hidden sm:inline microlabel">Watford · lead desk</span>
+            <nav className="flex items-center gap-1 text-[12px]">
+              <Link href="/admin" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Inbox</Link>
+              <Link href="/admin/team" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Team</Link>
+              <Link href="/admin/partners" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Partners</Link>
+            </nav>
           </div>
           <div className="flex items-center gap-4">
             {isDemo ? (

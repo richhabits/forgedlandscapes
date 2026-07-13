@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Download, LayoutList, Columns, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { LeadRow } from "@/lib/admin-data";
+import type { LeadRow, StaffRow } from "@/lib/admin-data";
 import {
   LEAD_STATUS_ORDER,
   LEAD_STATUS_LABELS,
@@ -19,13 +19,19 @@ import { LeadDrawer } from "./lead-drawer";
 
 type View = "list" | "board";
 
-export function LeadInbox({ leads, isDemo }: { leads: LeadRow[]; isDemo: boolean }) {
+export function LeadInbox({ leads, staff, isDemo }: { leads: LeadRow[]; staff: StaffRow[]; isDemo: boolean }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<string>("all");
   const [area, setArea] = useState<"all" | "in" | "out">("all");
   const [view, setView] = useState<View>("list");
   const [openId, setOpenId] = useState<string | null>(null);
+
+  const staffName = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const s of staff) m.set(s.id, s.name);
+    return m;
+  }, [staff]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -129,7 +135,11 @@ export function LeadInbox({ leads, isDemo }: { leads: LeadRow[]; isDemo: boolean
         <ul className="divide-y divide-bone-100/8 border-y rule">
           {filtered.map((l) => (
             <li key={l.id}>
-              <LeadListRow lead={l} onOpen={() => setOpenId(l.id)} />
+              <LeadListRow
+                lead={l}
+                assignee={l.assigned_to ? staffName.get(l.assigned_to) ?? null : null}
+                onOpen={() => setOpenId(l.id)}
+              />
             </li>
           ))}
         </ul>
@@ -140,6 +150,7 @@ export function LeadInbox({ leads, isDemo }: { leads: LeadRow[]; isDemo: boolean
       {openId && (
         <LeadDrawer
           leadId={openId}
+          staff={staff}
           isDemo={isDemo}
           onClose={() => setOpenId(null)}
           onMutated={() => router.refresh()}
@@ -149,7 +160,7 @@ export function LeadInbox({ leads, isDemo }: { leads: LeadRow[]; isDemo: boolean
   );
 }
 
-function LeadListRow({ lead, onOpen }: { lead: LeadRow; onOpen: () => void }) {
+function LeadListRow({ lead, assignee, onOpen }: { lead: LeadRow; assignee: string | null; onOpen: () => void }) {
   return (
     <button
       onClick={onOpen}
@@ -159,6 +170,9 @@ function LeadListRow({ lead, onOpen }: { lead: LeadRow; onOpen: () => void }) {
         <div className="flex items-center gap-2.5 flex-wrap">
           <span className="text-[14px] text-bone-50 font-medium truncate">{lead.name || lead.email}</span>
           <StatusChip status={lead.status} />
+          {assignee && (
+            <span className="text-[10.5px] uppercase tracking-[0.08em] text-brass-300/90">→ {assignee}</span>
+          )}
           {lead.in_area === false && (
             <span className="text-[10.5px] uppercase tracking-[0.1em] text-danger font-semibold">Out of area</span>
           )}

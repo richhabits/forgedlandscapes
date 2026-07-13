@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { X, Phone, Mail, ArrowRight, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { LeadDetail } from "@/lib/admin-data";
+import type { LeadDetail, StaffRow } from "@/lib/admin-data";
 import {
   LEAD_STATUS_LABELS,
   LEAD_STATUS_NEXT,
@@ -26,11 +26,13 @@ const REPLY_TEMPLATES = [
 
 export function LeadDrawer({
   leadId,
+  staff,
   isDemo,
   onClose,
   onMutated,
 }: {
   leadId: string;
+  staff: StaffRow[];
   isDemo: boolean;
   onClose: () => void;
   onMutated: () => void;
@@ -170,6 +172,22 @@ export function LeadDrawer({
             {/* advance + templated replies */}
             <div className="space-y-3">
               <p className="microlabel">Actions</p>
+              {staff.length > 0 && (
+                <div>
+                  <label className="microlabel !normal-case !tracking-normal !text-[11.5px] !text-stone-500 block mb-1.5">Assigned to</label>
+                  <select
+                    className="field"
+                    value={detail.assigned_to ?? ""}
+                    disabled={busy}
+                    onChange={(e) => mutate({ assigned_to: e.target.value || null }, e.target.value ? "Assigned" : "Unassigned")}
+                  >
+                    <option value="">Unassigned</option>
+                    {staff.filter((s) => s.active).map((s) => (
+                      <option key={s.id} value={s.id}>{s.name}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
               {next && (
                 <Button size="sm" disabled={busy} onClick={() => mutate({ status: next }, `Advanced to ${LEAD_STATUS_LABELS[next]}`)}>
                   Advance → {LEAD_STATUS_LABELS[next]}
