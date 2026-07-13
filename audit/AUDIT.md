@@ -98,6 +98,8 @@ The Highs cluster into three themes: **notifications/observability off (B-01, B-
 | B-02 | ✅ code | Cloudflare Turnstile server-verify + widget on the lead form; no-op until keys set, fails open on outage. |
 | D-04 / F-06 | ✅ code | Placeholder testimonials removed; real-review infra (`lib/reviews.ts`) + `Review`/`AggregateRating` schema, data-driven & schema emitted only for real reviews. |
 | F-05 | ✅ partial | Skip-to-content link added (WCAG 2.4.1); full axe pass still pending. |
+| U-04 | ✅ code | Owner report screen (`/admin/report`) — pipeline funnel, leads by source & service, in-area %, quote→win rate; computed from the leads list (no extra query, no chart lib). |
+| F-04 | ✅ code | Assessor chat (~450 lines) idle-deferred via dynamic import (`ssr:false`), off the marketing critical path. |
 | — | ✅ enterprise | CI gate (`.github/workflows/ci.yml`): build+typecheck+lint, `--max-warnings 0`. |
 | — | ✅ tool | `audit/load-test.js` (k6) — preview-only, read-only endpoints. |
 | **F-04** | ⬇️ **downgraded** | Correction: Leaflet is **already lazy-loaded** (dynamic `import("leaflet")` inside the map effect) — not in the initial bundle. Severity Med → Low. |
