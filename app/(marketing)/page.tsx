@@ -62,7 +62,7 @@ const homeFaqs = [
   },
   {
     q: "Who actually does the work?",
-    a: "Our own teams, run by a project lead you can phone. Construction-phase health and safety is managed under CDM 2015 on every job, waste leaves site under our Environment Agency carrier registration, and workmanship carries a 5-year guarantee.",
+    a: "Our own teams, run by a project lead you can phone. Construction-phase health and safety is managed under CDM 2015 on every job, and workmanship carries a 5-year guarantee.",
   },
 ];
 
@@ -117,10 +117,9 @@ export default function HomePage() {
 
           <Reveal delay={320}>
             <div className="mt-12 pt-6 border-t rule flex flex-wrap gap-x-8 gap-y-2 text-[12px] text-stone-400">
-              <span>{site.trust.insurance}</span>
               <span>{site.trust.guarantee}</span>
               <span>{site.trust.payments}</span>
-              <span>EA-registered waste carrier</span>
+              <span>CDM 2015 site management</span>
             </div>
           </Reveal>
         </div>
@@ -153,7 +152,7 @@ export default function HomePage() {
               {[
                 { n: "20", d: "mile radius, strictly kept" },
                 { n: "5yr", d: "workmanship guarantee" },
-                { n: "£5m", d: "public liability cover" },
+                { n: "100mm+", d: "compacted sub-base, minimum" },
               ].map((s) => (
                 <div key={s.d}>
                   <p className="font-display text-3xl text-brass-300">{s.n}</p>
@@ -207,7 +206,7 @@ export default function HomePage() {
               },
               {
                 h: "CDM 2015 site management",
-                p: "Construction-phase health and safety is formally managed on every project — method statements, risk assessments, a named project lead. Waste leaves site under our Environment Agency carrier registration.",
+                p: "Construction-phase health and safety is formally managed on every project — method statements, risk assessments, a named project lead — with the paperwork to back it, not just goodwill.",
               },
             ].map((c, i) => (
               <Reveal key={c.h} delay={i * 80} className="bg-bone-50 p-8">

@@ -68,16 +68,15 @@ export default function TermsPage() {
 
         <h2>Waste & materials</h2>
         <p>
-          All waste leaves site under our Environment Agency waste-carrier registration
-          ({/* TODO real CBDU number */}see footer) with transfer notes retained. Materials remain
-          our property until paid for in full.
+          We clear waste from site and dispose of it responsibly. Materials remain our property
+          until paid for in full.
         </p>
 
-        <h2>Insurance & disputes</h2>
+        <h2>Disputes</h2>
         <p>
-          We hold £5m public liability insurance; certificates available on request. If a dispute
-          can't be resolved directly, we'll engage with an appropriate alternative dispute resolution
-          scheme before anything escalates. Nothing in these terms reduces your statutory rights.
+          If a dispute can't be resolved directly, we'll engage with an appropriate alternative
+          dispute resolution scheme before anything escalates. Nothing in these terms reduces your
+          statutory rights.
         </p>
       </div>
     </div>

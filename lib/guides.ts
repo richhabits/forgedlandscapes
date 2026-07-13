@@ -245,7 +245,7 @@ export const guides: Guide[] = [
       {
         heading: "Staged payments, not full up front",
         body: [
-          "A fair firm never asks for the full amount before work starts. Payments are staged against progress — a modest deposit to secure materials and dates, then instalments tied to milestones. That protects you: your money tracks work actually done. It's how we structure every contract, alongside a written itemised quote, a fixed programme, public liability insurance and a 5-year workmanship guarantee.",
+          "A fair firm never asks for the full amount before work starts. Payments are staged against progress — a modest deposit to secure materials and dates, then instalments tied to milestones. That protects you: your money tracks work actually done. It's how we structure every contract, alongside a written itemised quote, a fixed programme and a 5-year workmanship guarantee.",
         ],
       },
     ],

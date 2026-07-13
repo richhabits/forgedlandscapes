@@ -68,8 +68,6 @@ export function Footer() {
           <div className="md:col-span-3">
             <p className="microlabel microlabel-brass mb-4">Standards</p>
             <ul className="space-y-2.5 text-[13px] text-stone-400">
-              <li>{site.trust.insurance}</li>
-              <li>{site.trust.wasteCarrier}</li>
               <li>{site.trust.guarantee}</li>
               <li>{site.trust.payments}</li>
               <li>14-day cancellation on off-premises contracts — Consumer Contracts Regulations 2013</li>

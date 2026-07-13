@@ -26,10 +26,11 @@ export const site = {
 
   hours: "Mon–Fri 8:00–18:00 · Sat 9:00–13:00",
 
-  // UK trust facts — placeholders clearly marked. Replace before launch.
+  // UK trust facts. Add these back ONLY once actually in place — never claim
+  // insurance or a waste-carrier registration you don't hold:
+  //   insurance: "£Xm public liability insurance",
+  //   wasteCarrier: "Environment Agency registered waste carrier — CBDUxxxxxx",
   trust: {
-    insurance: "£5m public liability insurance", // TODO: confirm insurer + certificate
-    wasteCarrier: "Environment Agency registered waste carrier — CBDU000000", // TODO: real CBDU number
     guarantee: "5-year workmanship guarantee on all hard landscaping",
     payments: "Staged payments — never full payment up front",
   },
