@@ -87,6 +87,28 @@ export function breadcrumbJsonLd(trail: { name: string; path: string }[]) {
   };
 }
 
+/** Article schema for guides — helps eligibility for article-style results. */
+export function articleJsonLd(a: {
+  slug: string;
+  title: string;
+  description: string;
+  updated: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: a.title,
+    description: a.description,
+    url: `${site.url}/guides/${a.slug}`,
+    image: `${site.url}/opengraph-image`,
+    dateModified: a.updated,
+    datePublished: a.updated,
+    author: { "@type": "Organization", name: site.name, "@id": `${site.url}/#business` },
+    publisher: { "@id": `${site.url}/#business` },
+    isPartOf: { "@type": "WebSite", url: site.url, name: site.name },
+  };
+}
+
 export function faqJsonLd(faqs: { q: string; a: string }[]) {
   return {
     "@context": "https://schema.org",
