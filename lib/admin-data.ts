@@ -137,19 +137,34 @@ export type AdminMetrics = {
   median_lead_to_action_seconds: number | null;
 };
 
-const LEAD_COLS =
-  "id,created_at,email,name,phone,postcode,in_area,distance_miles,project_type,budget_band,timeline,message,source,status,user_id,assigned_to";
+// Base columns always present; assigned_to arrives with migration 0003. We try
+// the full set and fall back gracefully so a deploy that lands BEFORE the CRM
+// migration is applied never breaks the existing lead inbox.
+const LEAD_COLS_BASE =
+  "id,created_at,email,name,phone,postcode,in_area,distance_miles,project_type,budget_band,timeline,message,source,status,user_id";
+const LEAD_COLS = `${LEAD_COLS_BASE},assigned_to`;
+
+function withAssigned(rows: Partial<LeadRow>[] | null): LeadRow[] {
+  return (rows ?? []).map((l) => ({ assigned_to: null, ...l }) as LeadRow);
+}
 
 export async function listLeads(): Promise<LeadRow[]> {
   if (!supabaseConfigured()) return demoLeads;
   const supabase = await createServerSupabase();
   if (!supabase) return demoLeads;
-  const { data } = await supabase
+  const full = await supabase
     .from("leads")
     .select(LEAD_COLS)
     .order("created_at", { ascending: false })
     .limit(1000);
-  return (data as LeadRow[] | null) ?? [];
+  if (!full.error) return withAssigned(full.data as Partial<LeadRow>[] | null);
+  // assigned_to not present yet — fall back to base columns.
+  const base = await supabase
+    .from("leads")
+    .select(LEAD_COLS_BASE)
+    .order("created_at", { ascending: false })
+    .limit(1000);
+  return withAssigned(base.data as Partial<LeadRow>[] | null);
 }
 
 export async function getLeadDetail(id: string): Promise<LeadDetail | null> {
@@ -157,11 +172,19 @@ export async function getLeadDetail(id: string): Promise<LeadDetail | null> {
   const supabase = await createServerSupabase();
   if (!supabase) return demoLeadDetail(id);
 
-  const { data: lead } = await supabase
+  let leadRes = await supabase
     .from("leads")
     .select(`${LEAD_COLS},transcript`)
     .eq("id", id)
     .maybeSingle();
+  if (leadRes.error) {
+    leadRes = await supabase
+      .from("leads")
+      .select(`${LEAD_COLS_BASE},transcript`)
+      .eq("id", id)
+      .maybeSingle();
+  }
+  const lead = leadRes.data;
   if (!lead) return null;
 
   const { data: events } = await supabase
@@ -192,6 +215,7 @@ export async function getLeadDetail(id: string): Promise<LeadDetail | null> {
 
   return {
     ...(lead as LeadRow),
+    assigned_to: (lead as Partial<LeadRow>).assigned_to ?? null,
     transcript,
     events: (events as LeadEvent[] | null) ?? [],
     project,
