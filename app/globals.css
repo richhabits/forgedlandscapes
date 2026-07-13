@@ -1,0 +1,288 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/inter-tight";
+
+/* ————————————————————————————————————————————————
+   FORGED LANDSCAPES — design tokens
+   Dark heritage editorial: forge green / bone / brass
+   ———————————————————————————————————————————————— */
+
+@theme {
+  /* palette */
+  --color-forge-950: #10140f;
+  --color-forge-900: #151a14;
+  --color-forge-850: #191f18;
+  --color-forge-800: #1e251c;
+  --color-forge-700: #2a3427;
+  --color-forge-600: #3a4636;
+
+  --color-bone-50: #f4efe4;
+  --color-bone-100: #ede6d6;
+  --color-bone-200: #e0d7c2;
+  --color-bone-300: #cfc4ab;
+
+  --color-stone-400: #a89f8c;
+  --color-stone-500: #8a8272;
+  --color-stone-600: #6e685b;
+
+  --color-brass-300: #d3b078;
+  --color-brass-400: #c39d5f;
+  --color-brass-500: #b08a49;
+  --color-brass-600: #93713a;
+
+  --color-moss-400: #8b9a78;
+  --color-moss-600: #5f6e50;
+
+  --color-danger: #c25b4e;
+
+  /* type */
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 0.7s var(--ease-out-soft) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-forge-950);
+  color: var(--color-bone-100);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-brass-500);
+  color: var(--color-forge-950);
+}
+
+/* ————— editorial utilities ————— */
+
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 0;
+  letter-spacing: -0.015em;
+}
+
+.display-italic {
+  font-style: italic;
+  font-variation-settings: "opsz" 72, "SOFT" 30, "WONK" 1;
+}
+
+/* uppercase micro label — the editorial connective tissue */
+.microlabel {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-stone-400);
+}
+
+.microlabel-brass {
+  color: var(--color-brass-400);
+}
+
+/* hairline rules */
+.rule {
+  border-color: color-mix(in srgb, var(--color-bone-100) 12%, transparent);
+}
+
+.rule-strong {
+  border-color: color-mix(in srgb, var(--color-bone-100) 22%, transparent);
+}
+
+/* film grain — inline SVG turbulence, no asset needed */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+/* image treatment — every photo gets the house grade */
+.img-grade {
+  filter: saturate(0.86) contrast(1.04) brightness(0.96);
+}
+
+/* scroll reveal (driven by Reveal component) */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s var(--ease-out-soft), transform 0.7s var(--ease-out-soft);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* number index for service rows */
+.index-num {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 40;
+  font-style: italic;
+  color: var(--color-brass-400);
+}
+
+/* focus visible — brass, accessible on dark */
+:focus-visible {
+  outline: 2px solid var(--color-brass-400);
+  outline-offset: 2px;
+}
+
+/* forms on dark */
+.field {
+  width: 100%;
+  background: color-mix(in srgb, var(--color-bone-100) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-bone-100) 16%, transparent);
+  border-radius: 2px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9375rem;
+  color: var(--color-bone-100);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.field::placeholder {
+  color: var(--color-stone-500);
+}
+
+.field:hover {
+  border-color: color-mix(in srgb, var(--color-bone-100) 28%, transparent);
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--color-brass-400);
+  background: color-mix(in srgb, var(--color-bone-100) 6%, transparent);
+}
+
+select.field option {
+  background: var(--color-forge-900);
+  color: var(--color-bone-100);
+}
+
+/* leaflet dark-theme fixes */
+.leaflet-container {
+  background: var(--color-forge-900);
+  font-family: var(--font-sans);
+}
+
+.leaflet-control-attribution {
+  background: rgba(16, 20, 15, 0.75) !important;
+  color: var(--color-stone-500) !important;
+  font-size: 9px !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-stone-400) !important;
+}
+
+/* thin scrollbar for chat */
+.thin-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-bone-100) 18%, transparent);
+  border-radius: 3px;
+}
+
+/* prose for legal pages */
+.prose-forged {
+  max-width: 68ch;
+}
+
+.prose-forged h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  color: var(--color-bone-50);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-forged h3 {
+  font-weight: 620;
+  font-size: 1.02rem;
+  color: var(--color-bone-50);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-forged p,
+.prose-forged li {
+  color: var(--color-stone-400);
+  font-size: 0.9375rem;
+  margin-bottom: 0.9rem;
+}
+
+.prose-forged li {
+  margin-bottom: 0.35rem;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.prose-forged li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-brass-500);
+}
+
+.prose-forged strong {
+  color: var(--color-bone-100);
+  font-weight: 600;
+}
+
+.prose-forged a {
+  color: var(--color-brass-300);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
