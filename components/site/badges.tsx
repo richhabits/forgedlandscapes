@@ -14,6 +14,7 @@ const marks: Record<string, { top: string; bottom: string }> = {
 };
 
 export function BadgeBanner({ compact = false }: { compact?: boolean }) {
+  if (site.badges.length === 0) return null;
   return (
     <div
       aria-label="Industry affiliations"

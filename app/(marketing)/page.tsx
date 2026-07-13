@@ -217,12 +217,7 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-10">
-            <BadgeBanner />
-            <p className="mt-3 text-[11px] text-forge-950/50">
-              Affiliation marks shown as placeholders pending membership confirmation.
-            </p>
-          </div>
+          <BadgeBanner />{/* renders once real accreditations are added to site-config */}
         </div>
       </section>
 

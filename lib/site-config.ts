@@ -12,7 +12,7 @@ export const site = {
     "Premium design-and-build landscaping across Watford and a 20-mile radius: porcelain patios, block-paved and resin driveways, bespoke decking and pergolas, lawns, planting and full garden transformations.",
   phone: "01923 000 000", // TODO: real number
   phoneHref: "tel:+441923000000",
-  email: "enquiries@forgedlandscapes.co.uk", // TODO: live mailbox
+  email: "richhabitslondon@gmail.com", // interim public inbox — swap for a domain mailbox (e.g. enquiries@forgedlandscapes.co.uk) when set up
   adminEmail: process.env.ADMIN_EMAIL || "richhabitslondon@gmail.com",
 
   base: {
@@ -34,14 +34,11 @@ export const site = {
     payments: "Staged payments — never full payment up front",
   },
 
-  // Industry affiliations — SWAP the placeholder marks in /public/badges
-  // for licensed originals once memberships are confirmed. Do not fabricate membership.
-  badges: [
-    { key: "bali", label: "BALI Registered Member" },
-    { key: "apl", label: "APL — Association of Professional Landscapers" },
-    { key: "trustmark", label: "TrustMark Government Endorsed Quality" },
-    { key: "marshalls", label: "Marshalls Accredited Installer" },
-  ],
+  // Industry affiliations — none held yet, so intentionally empty and the
+  // affiliation banner renders nothing. Add an entry ONLY for a body actually
+  // joined (e.g. { key: "bali", label: "BALI Registered Member" }) and drop its
+  // licensed logo into /public/badges. Never list an unheld accreditation.
+  badges: [] as { key: string; label: string }[],
 
   social: {
     instagram: "https://instagram.com/forgedlandscapes", // TODO
