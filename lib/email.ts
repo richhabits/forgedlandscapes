@@ -98,6 +98,28 @@ export async function sendAdminLeadAlert(lead: {
   });
 }
 
+/** Instant acknowledgement to the customer the moment they enquire (speed-to-lead). */
+export async function sendClientLeadAck(
+  to: string,
+  opts: { name?: string | null; in_area: boolean | null }
+): Promise<SendResult> {
+  const greeting = opts.name ? `${esc(opts.name.split(" ")[0])} — thank` : "Thank";
+  const body =
+    opts.in_area === false
+      ? `${greeting} you for getting in touch. Your postcode sits just outside the 20-mile radius we work to around Watford, so we've added you to our waitlist — as we take on more crews the radius grows, and we'll come back to you first if it does. If it's a larger project, do reply and we'll take a proper look.`
+      : `${greeting} you for getting in touch. We've received your enquiry and a real person will come back to you <strong>within one working day</strong>.<br/><br/>Want to speed things up? Complete your project brief — a few photos, rough sizes, a quick sketch — and your survey arrives already knowing your garden.`;
+  const rows = `<tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333;line-height:1.7;">
+    ${body}<br/><br/>
+    <strong>Forged Landscapes</strong> · <a href="${site.phoneHref}" style="color:#93713a;">${site.phone}</a> · ${site.hours}
+  </td></tr>`;
+  return send({
+    to,
+    subject: "We've got your enquiry — Forged Landscapes",
+    html: shell("Enquiry received", rows),
+    replyTo: site.adminEmail,
+  });
+}
+
 export async function sendAdminBriefAlert(brief: {
   email: string;
   title: string;

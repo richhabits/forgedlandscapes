@@ -13,39 +13,14 @@ import { AreaMap } from "@/components/site/area-map";
 import { BadgeBanner } from "@/components/site/badges";
 import { buttonClass } from "@/components/ui/button";
 import { FaqList } from "@/components/site/faq";
-import { faqJsonLd, JsonLd } from "@/lib/jsonld";
+import { faqJsonLd, reviewsJsonLd, JsonLd } from "@/lib/jsonld";
+import { reviews as testimonials } from "@/lib/reviews";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   description: site.description,
   alternates: { canonical: "/" },
 };
-
-/* Placeholder testimonials — REPLACE with real, attributable reviews
-   (Google review screenshots → text) before launch. */
-const testimonials = [
-  {
-    quote:
-      "The brief-before-survey process sounded like homework — it took five minutes and meant the first site visit was about decisions, not measuring. Patio's flawless two winters on.",
-    who: "K. Patel",
-    where: "Bushey",
-    job: "Porcelain patio & lighting",
-  },
-  {
-    quote:
-      "Three quotes: two day-rates and a shrug, one itemised document with drainage drawn properly. Easiest decision we made on the whole house.",
-    who: "S. Whitmore",
-    where: "St Albans",
-    job: "Resin driveway & front garden",
-  },
-  {
-    quote:
-      "They told us our first idea would fight the levels and cost more to maintain — then designed something better for the same money. That's who you want on your garden.",
-    who: "D. Okafor",
-    where: "Radlett",
-    job: "Full garden redesign",
-  },
-];
 
 const homeFaqs = [
   {
@@ -304,8 +279,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————— TESTIMONIALS ————— */}
+      {/* ————— TESTIMONIALS (real, attributable reviews only) ————— */}
+      {testimonials.length > 0 && (
       <section className="mx-auto max-w-7xl px-5 md:px-10 py-24 md:py-28">
+        <JsonLd data={reviewsJsonLd(testimonials)} />
         <SectionHead
           label="Word of mouth"
           title={
@@ -333,6 +310,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      )}
 
       {/* ————— FAQ + CTA ————— */}
       <section className="mx-auto max-w-7xl px-5 md:px-10 pb-24 md:pb-28 grid gap-14 lg:grid-cols-12">

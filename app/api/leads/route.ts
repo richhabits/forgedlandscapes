@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { leadSchema } from "@/lib/validation";
 import { checkServiceArea } from "@/lib/geo";
 import { getServerSupabase } from "@/lib/supabase";
-import { sendAdminLeadAlert } from "@/lib/email";
+import { sendAdminLeadAlert, sendClientLeadAck } from "@/lib/email";
 import { hit, clientIp } from "@/lib/rate-limit";
+import { turnstileEnabled, verifyTurnstile } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -35,6 +36,15 @@ export async function POST(req: Request) {
 
   const lead = parsed.data;
 
+  // Bot protection on the plain public forms (skipped entirely unless Turnstile
+  // is configured; the multi-step assessor has its own friction).
+  if (turnstileEnabled() && (lead.source === "form" || lead.source === "radius_widget")) {
+    const human = await verifyTurnstile(lead.turnstile_token, clientIp(req));
+    if (!human) {
+      return NextResponse.json({ ok: false, error: "Verification failed — please try again." }, { status: 400 });
+    }
+  }
+
   // Authoritative radius check — never trust the client's verdict
   const radius = await checkServiceArea(lead.postcode);
   const in_area = radius.status === "in" ? true : radius.status === "out" ? false : null;
@@ -57,6 +67,7 @@ export async function POST(req: Request) {
     status: in_area === false ? "out_of_area" : "new",
     transcript: lead.transcript ?? null,
     referred_by: lead.referred_by ? lead.referred_by.toLowerCase().trim() : null,
+    meta: lead.attribution && Object.keys(lead.attribution).length ? lead.attribution : {},
   };
 
   let stored = false;
@@ -78,7 +89,9 @@ export async function POST(req: Request) {
     console.log("[leads] preview mode — lead not persisted:", record.email);
   }
 
+  // Notify staff (speed-to-lead) AND acknowledge the customer instantly.
   sendAdminLeadAlert(record).catch(() => {});
+  sendClientLeadAck(record.email, { name: record.name, in_area }).catch(() => {});
 
   return NextResponse.json({
     ok: true,

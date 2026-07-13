@@ -6,6 +6,8 @@ import { projectTypeOptions, budgetOptions, timelineOptions } from "@/lib/servic
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent, EVENTS } from "@/lib/analytics";
+import { collectAttribution } from "@/lib/attribution";
+import { TurnstileWidget } from "@/components/site/turnstile-widget";
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -36,6 +38,8 @@ export function ContactForm() {
         typeof window !== "undefined"
           ? new URLSearchParams(window.location.search).get("ref") || ""
           : "",
+      attribution: collectAttribution(),
+      turnstile_token: String(fd.get("cf-turnstile-response") || ""),
       company: String(fd.get("company") || ""), // honeypot
     };
 
@@ -154,6 +158,9 @@ export function ContactForm() {
         <p className={cn("sm:col-span-2 text-[13px] text-danger")} role="alert">{error}</p>
       )}
 
+      <div className="sm:col-span-2">
+        <TurnstileWidget />
+      </div>
       <div className="sm:col-span-2">
         <Button type="submit" size="lg" disabled={status === "sending"} className="w-full sm:w-auto">
           {status === "sending" ? "Sending…" : "Send enquiry"}

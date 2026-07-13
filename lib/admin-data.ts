@@ -35,6 +35,7 @@ export type LeadRow = {
   assigned_to: string | null;
   referred_by?: string | null;
   is_sample?: boolean;
+  meta?: Record<string, string> | null;
 };
 
 export type AppSetting = {
@@ -152,7 +153,7 @@ export type AdminMetrics = {
 // migration is applied never breaks the existing lead inbox.
 const LEAD_COLS_BASE =
   "id,created_at,email,name,phone,postcode,in_area,distance_miles,project_type,budget_band,timeline,message,source,status,user_id";
-const LEAD_COLS = `${LEAD_COLS_BASE},assigned_to,referred_by,is_sample`;
+const LEAD_COLS = `${LEAD_COLS_BASE},assigned_to,referred_by,is_sample,meta`;
 
 function withAssigned(rows: Partial<LeadRow>[] | null): LeadRow[] {
   return (rows ?? []).map((l) => ({ assigned_to: null, ...l }) as LeadRow);

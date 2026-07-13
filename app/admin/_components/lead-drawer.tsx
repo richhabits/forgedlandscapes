@@ -154,6 +154,16 @@ export function LeadDrawer({
               {detail.referred_by && (
                 <Row k="Referred by"><span className="text-brass-300">{detail.referred_by}</span></Row>
               )}
+              {detail.meta && (detail.meta.landing || detail.meta.utm_source || detail.meta.referrer) && (
+                <Row k="Came from">
+                  <span className="text-[12px] text-stone-400">
+                    {detail.meta.landing ? `${detail.meta.landing}` : ""}
+                    {detail.meta.utm_source ? ` · ${detail.meta.utm_source}${detail.meta.utm_medium ? "/" + detail.meta.utm_medium : ""}` : ""}
+                    {detail.meta.utm_campaign ? ` · ${detail.meta.utm_campaign}` : ""}
+                    {!detail.meta.landing && !detail.meta.utm_source && detail.meta.referrer ? detail.meta.referrer : ""}
+                  </span>
+                </Row>
+              )}
               {detail.message && <Row k="Message"><span className="text-bone-100/90 leading-relaxed">{detail.message}</span></Row>}
             </dl>
 

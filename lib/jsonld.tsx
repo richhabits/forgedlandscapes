@@ -1,6 +1,8 @@
 import { site } from "@/lib/site-config";
 import { coveredTowns } from "@/lib/areas";
+import { reviews, averageRating } from "@/lib/reviews";
 import type { Service } from "@/lib/services";
+import type { Review } from "@/lib/reviews";
 
 /**
  * Structured data — the machine-readable half of "local authority".
@@ -57,7 +59,31 @@ export function localBusinessJsonLd() {
         closes: "13:00",
       },
     ],
+    // Star rating in search results — only when real reviews exist (never faked).
+    ...(averageRating()
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: averageRating(),
+            reviewCount: reviews.length,
+            bestRating: 5,
+          },
+        }
+      : {}),
   };
+}
+
+/** Individual Review schema — emitted only for real, attributable reviews. */
+export function reviewsJsonLd(list: Review[]) {
+  return list.map((r) => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
+    itemReviewed: { "@id": `${site.url}/#business` },
+    author: { "@type": "Person", name: `${r.who}${r.where ? `, ${r.where}` : ""}` },
+    reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+    reviewBody: r.quote,
+    ...(r.date ? { datePublished: r.date } : {}),
+  }));
 }
 
 export function serviceJsonLd(service: Service) {
