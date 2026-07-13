@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { getAdminAccess } from "@/lib/admin-auth";
 import { getProjectDetail, getProjectMessages } from "@/lib/admin-data";
 import { ProjectThread } from "@/app/admin/_components/project-thread";
+import { QuoteDrafter } from "@/app/admin/_components/quote-drafter";
 import {
   PROJECT_TYPE_LABELS,
   PROJECT_STATUS_LABELS,
@@ -60,6 +61,11 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
         <Meta k="Budget" v={label(BUDGET_LABELS, p.budget_band)} />
         <Meta k="Timeline" v={label(TIMELINE_LABELS, p.timeline)} />
       </dl>
+
+      {/* rough estimate */}
+      <Section title="Estimate">
+        <QuoteDrafter projectId={p.id} isDemo={isDemo} />
+      </Section>
 
       {/* conversation with the client */}
       <Section title="Messages with the client">
