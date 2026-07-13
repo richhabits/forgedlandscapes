@@ -63,7 +63,9 @@ export function AdminLogin() {
     setState({ name: "form", sending: true });
     const { error } = await client.auth.signInWithOtp({
       email: email.trim().toLowerCase(),
-      options: { emailRedirectTo: `${window.location.origin}/admin` },
+      // Land back on the (ungated) login page so the PKCE code can be exchanged
+      // here; once the session exists, onAuthStateChange redirects to /admin.
+      options: { emailRedirectTo: `${window.location.origin}/admin/login` },
     });
     if (error) {
       setState({
