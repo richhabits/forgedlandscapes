@@ -26,6 +26,7 @@ export default async function ConsoleLayout({ children }: { children: React.Reac
             </Link>
             <nav className="flex items-center gap-1 text-[12px]">
               <Link href="/admin" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Inbox</Link>
+              <Link href="/admin/report" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Report</Link>
               <Link href="/admin/team" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Team</Link>
               <Link href="/admin/partners" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Partners</Link>
               <Link href="/admin/rates" className="px-2.5 py-1.5 rounded-[2px] text-stone-400 hover:text-bone-100 hover:bg-bone-100/[0.05] transition-colors">Rates</Link>

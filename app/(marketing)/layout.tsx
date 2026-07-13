@@ -1,7 +1,7 @@
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { CookieConsent } from "@/components/site/cookie-consent";
-import { AssessorWidget } from "@/components/assessor/assessor-widget";
+import { AssessorMount } from "@/components/assessor/assessor-mount";
 
 export default function MarketingLayout({
   children,
@@ -20,7 +20,7 @@ export default function MarketingLayout({
       <Header />
       <main id="main">{children}</main>
       <Footer />
-      <AssessorWidget />
+      <AssessorMount />
       <CookieConsent />
     </>
   );
