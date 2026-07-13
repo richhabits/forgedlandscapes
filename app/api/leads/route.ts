@@ -4,6 +4,7 @@ import { checkServiceArea } from "@/lib/geo";
 import { getServerSupabase } from "@/lib/supabase";
 import { sendAdminLeadAlert, sendClientLeadAck } from "@/lib/email";
 import { hit, clientIp } from "@/lib/rate-limit";
+import { turnstileEnabled, verifyTurnstile } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -34,6 +35,15 @@ export async function POST(req: Request) {
   }
 
   const lead = parsed.data;
+
+  // Bot protection on the plain public forms (skipped entirely unless Turnstile
+  // is configured; the multi-step assessor has its own friction).
+  if (turnstileEnabled() && (lead.source === "form" || lead.source === "radius_widget")) {
+    const human = await verifyTurnstile(lead.turnstile_token, clientIp(req));
+    if (!human) {
+      return NextResponse.json({ ok: false, error: "Verification failed — please try again." }, { status: 400 });
+    }
+  }
 
   // Authoritative radius check — never trust the client's verdict
   const radius = await checkServiceArea(lead.postcode);

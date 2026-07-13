@@ -32,6 +32,7 @@ export const leadSchema = z.object({
   source: z.enum(["assessor", "assessor_ai", "form", "radius_widget"]).default("form"),
   referred_by: z.string().trim().max(254).optional().or(z.literal("")),
   attribution: z.record(z.string().max(40), z.string().max(300)).optional(),
+  turnstile_token: z.string().max(4000).optional().or(z.literal("")),
   consent: z.literal(true, { error: "Please confirm you're happy for us to contact you" }),
   transcript: z
     .array(
