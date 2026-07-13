@@ -14,6 +14,7 @@ import {
   type AssessorStep,
 } from "@/lib/assessor";
 import { buttonClass } from "@/components/ui/button";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 
 type Msg = { role: "user" | "assistant"; content: string };
 type Mode = "ai" | "scripted" | "unknown";
@@ -45,6 +46,18 @@ export function AssessorWidget() {
   const append = useCallback((m: Msg) => {
     setMessages((prev) => [...prev, m]);
   }, []);
+
+  // Fire the lead conversion once, when the assessor reaches its captured state.
+  const trackedRef = useRef(false);
+  useEffect(() => {
+    if (step === "done" && !trackedRef.current) {
+      trackedRef.current = true;
+      trackEvent(EVENTS.generateLead, {
+        source: mode === "ai" ? "assessor_ai" : "assessor",
+        in_area: data.in_area,
+      });
+    }
+  }, [step, mode, data.in_area]);
 
   // boot conversation on first open
   useEffect(() => {

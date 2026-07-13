@@ -5,6 +5,7 @@ import Link from "next/link";
 import { projectTypeOptions, budgetOptions, timelineOptions } from "@/lib/services";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -48,6 +49,7 @@ export function ContactForm() {
       }
       setInArea(j.in_area);
       setStatus("done");
+      trackEvent(EVENTS.generateLead, { source: "form", in_area: j.in_area });
     } catch {
       setError("Network hiccup — try again or phone us.");
       setStatus("error");

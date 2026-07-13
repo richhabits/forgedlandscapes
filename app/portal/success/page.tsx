@@ -3,6 +3,8 @@ import Link from "next/link";
 import { site } from "@/lib/site-config";
 import { Reveal } from "@/components/site/reveal";
 import { buttonClass } from "@/components/ui/button";
+import { TrackConversion } from "@/components/site/track-conversion";
+import { EVENTS } from "@/lib/analytics";
 
 export const metadata: Metadata = {
   title: "Brief received",
@@ -31,6 +33,7 @@ const steps = [
 export default function SuccessPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 md:px-10 py-16 md:py-24">
+      <TrackConversion event={EVENTS.submitBrief} params={{ source: "portal" }} />
       <Reveal>
         <p className="microlabel microlabel-brass flex items-center gap-3">
           <span className="inline-block w-8 border-t border-brass-500" aria-hidden />

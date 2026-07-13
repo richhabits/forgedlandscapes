@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { site } from "@/lib/site-config";
 import { localBusinessJsonLd, JsonLd } from "@/lib/jsonld";
+import { GoogleAnalytics } from "@/components/site/google-analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,6 +27,11 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
+  // Google Search Console (URL-prefix property). Paste the token into
+  // NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION; omitted entirely when unset.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export const viewport: Viewport = {
@@ -42,6 +48,7 @@ export default function RootLayout({
       <body className="antialiased">
         <JsonLd data={localBusinessJsonLd()} />
         {children}
+        <GoogleAnalytics />
       </body>
     </html>
   );

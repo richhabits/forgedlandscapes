@@ -39,6 +39,8 @@ export function CookieConsent() {
     } catch {
       /* noop */
     }
+    // Let Google Consent Mode react immediately, no reload.
+    window.dispatchEvent(new CustomEvent("fl-consent-change", { detail: analytics }));
     setVisible(false);
   }
 
