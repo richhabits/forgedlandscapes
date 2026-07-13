@@ -85,3 +85,21 @@ Fix those three and the platform is ready to scale. The 100x plan (SCALE_PLAN.md
 - **Medium: 9 · Low: 6.**
 
 The Highs cluster into three themes: **notifications/observability off (B-01, B-03, U-01)**, **measurement off (F-01, C-02)**, and **trust proof missing (D-01, D-02, C-01)**. None are architectural — all are switch-on / populate / instrument work.
+
+---
+
+## Remediation log (branch `audit/scale-100x`, code-only — awaiting owner keys/assets for the rest)
+| Finding | Status | What shipped |
+|---|---|---|
+| U-01 | ✅ code | Instant customer acknowledgement email on lead submit (`lib/email.ts`, `/api/leads`). |
+| F-03 | ✅ code | `/work` SSR → ISR (revalidate 300). |
+| U-02 / C-02 | ✅ code | UTM + landing + referrer captured to `leads.meta` (`lib/attribution.ts`); shown as "Came from" in the drawer. |
+| B-03 | ✅ code | Error boundaries (`app/error.tsx`, `app/global-error.tsx`) + `onRequestError` instrumentation → `lib/observability.ts` (forwards to Sentry when a DSN is added). |
+| B-02 | ✅ code | Cloudflare Turnstile server-verify + widget on the lead form; no-op until keys set, fails open on outage. |
+| D-04 / F-06 | ✅ code | Placeholder testimonials removed; real-review infra (`lib/reviews.ts`) + `Review`/`AggregateRating` schema, data-driven & schema emitted only for real reviews. |
+| F-05 | ✅ partial | Skip-to-content link added (WCAG 2.4.1); full axe pass still pending. |
+| — | ✅ enterprise | CI gate (`.github/workflows/ci.yml`): build+typecheck+lint, `--max-warnings 0`. |
+| — | ✅ tool | `audit/load-test.js` (k6) — preview-only, read-only endpoints. |
+| **F-04** | ⬇️ **downgraded** | Correction: Leaflet is **already lazy-loaded** (dynamic `import("leaflet")` inside the map effect) — not in the initial bundle. Severity Med → Low. |
+
+**Awaiting owner (code wired, dormant until provided):** Resend key + domain (B-01) · GA4 id (F-01) · Sentry DSN (B-03 full) · Turnstile + Upstash keys (B-02 full) · real photos + reviews (D-01/D-02/C-01) · uptime monitor. Supabase advisor output to be pasted here once you run them.
