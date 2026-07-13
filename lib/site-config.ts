@@ -12,8 +12,8 @@ export const site = {
     "Premium design-and-build landscaping across Watford and a 20-mile radius: porcelain patios, block-paved and resin driveways, bespoke decking and pergolas, lawns, planting and full garden transformations.",
   phone: "07398 509681",
   phoneHref: "tel:+447398509681",
-  email: "forgedlandscapes@gmail.com", // business inbox — swap for a domain mailbox (e.g. enquiries@forgedlandscapes.co.uk) later if wanted
-  adminEmail: process.env.ADMIN_EMAIL || "forgedlandscapes@gmail.com",
+  email: "landscapesforged@gmail.com", // business inbox — swap for a domain mailbox (e.g. enquiries@forgedlandscapes.co.uk) later if wanted
+  adminEmail: process.env.ADMIN_EMAIL || "landscapesforged@gmail.com",
 
   base: {
     // WD17 outcode centroid, via postcodes.io — the compass point for the 20-mile radius

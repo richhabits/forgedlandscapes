@@ -50,7 +50,7 @@ redirects non-admins, and Row Level Security independently returns them no data.
 2. Supabase → **SQL Editor** → run, swapping the email:
    ```sql
    insert into public.admins (user_id)
-   select id from auth.users where lower(email) = lower('forgedlandscapes@gmail.com')
+   select id from auth.users where lower(email) = lower('landscapesforged@gmail.com')
    on conflict (user_id) do nothing;
    ```
 3. Reload `/admin` — you're in. See `docs/ADMIN-GUIDE.md` for day-to-day use.
