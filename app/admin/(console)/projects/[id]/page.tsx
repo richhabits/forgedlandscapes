@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { getAdminAccess } from "@/lib/admin-auth";
-import { getProjectDetail } from "@/lib/admin-data";
+import { getProjectDetail, getProjectMessages } from "@/lib/admin-data";
+import { ProjectThread } from "@/app/admin/_components/project-thread";
 import {
   PROJECT_TYPE_LABELS,
   PROJECT_STATUS_LABELS,
@@ -21,7 +22,7 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
   const access = await getAdminAccess();
   const isDemo = access.ok && access.gate.mode === "demo";
 
-  const p = await getProjectDetail(id);
+  const [p, messages] = await Promise.all([getProjectDetail(id), getProjectMessages(id)]);
   if (!p) notFound();
 
   const photos = p.media.filter((m) => m.kind === "garden_photo" || m.kind === "garden_video");
@@ -59,6 +60,11 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
         <Meta k="Budget" v={label(BUDGET_LABELS, p.budget_band)} />
         <Meta k="Timeline" v={label(TIMELINE_LABELS, p.timeline)} />
       </dl>
+
+      {/* conversation with the client */}
+      <Section title="Messages with the client">
+        <ProjectThread projectId={p.id} initialMessages={messages} clientName={p.clientEmail} isDemo={isDemo} />
+      </Section>
 
       {/* description */}
       <Section title="The brief">

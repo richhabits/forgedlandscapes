@@ -374,3 +374,53 @@ export async function getProjectMessages(projectId: string): Promise<ProjectMess
     .order("created_at", { ascending: true });
   return (data as ProjectMessage[] | null) ?? [];
 }
+
+export type UnreadThread = {
+  project_id: string;
+  project_title: string | null;
+  client: string | null;
+  count: number;
+  latest: string;
+  latest_at: string;
+};
+
+/** Client messages the team hasn't read yet — powers "📩 you have a message from…". */
+export async function listUnreadThreads(): Promise<UnreadThread[]> {
+  if (!supabaseConfigured()) return [];
+  const supabase = await createServerSupabase();
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("project_messages")
+    .select("project_id,author_name,body,created_at")
+    .eq("sender_role", "client")
+    .eq("read_by_team", false)
+    .order("created_at", { ascending: false });
+  if (error || !data) return [];
+
+  const byProject = new Map<string, UnreadThread>();
+  for (const m of data as Array<{ project_id: string; author_name: string | null; body: string; created_at: string }>) {
+    const e = byProject.get(m.project_id);
+    if (e) e.count++;
+    else
+      byProject.set(m.project_id, {
+        project_id: m.project_id,
+        project_title: null,
+        client: m.author_name,
+        count: 1,
+        latest: m.body,
+        latest_at: m.created_at,
+      });
+  }
+  const threads = [...byProject.values()];
+
+  // Enrich with project titles in one query.
+  if (threads.length) {
+    const { data: projs } = await supabase
+      .from("projects")
+      .select("id,title")
+      .in("id", threads.map((t) => t.project_id));
+    const titles = new Map((projs ?? []).map((p: { id: string; title: string | null }) => [p.id, p.title]));
+    for (const t of threads) t.project_title = titles.get(t.project_id) ?? null;
+  }
+  return threads;
+}

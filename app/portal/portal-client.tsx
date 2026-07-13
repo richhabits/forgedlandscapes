@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import type { Session, SupabaseClient } from "@supabase/supabase-js";
 import { getBrowserSupabase, supabaseConfigured } from "@/lib/supabase";
 import { BriefWizard } from "@/components/portal/brief-wizard";
+import { ProjectMessages } from "@/components/portal/project-messages";
 import { Button } from "@/components/ui/button";
 
 type Stage =
@@ -179,6 +180,7 @@ export function PortalClient() {
           Sign out ({stage.session.user.email})
         </button>
       </div>
+      <ProjectMessages client={stage.client} user={stage.session.user} />
       <BriefWizard
         backend={{ mode: "real", client: stage.client, user: stage.session.user }}
         initialEmail={stage.session.user.email || undefined}
