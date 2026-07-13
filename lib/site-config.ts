@@ -47,6 +47,11 @@ export const site = {
     instagram: "https://instagram.com/forgedlandscapes", // TODO
     facebook: "https://facebook.com/forgedlandscapes", // TODO
   },
+
+  // Google Business Profile short review link (g.page/r/…). Once set, the
+  // "review us" ask can be surfaced in post-completion emails. See
+  // docs/GBP-PLAYBOOK.md for how to create the profile and get this link.
+  reviewUrl: "", // TODO: paste GBP review link once the profile is live
 } as const;
 
 export const nav = [
