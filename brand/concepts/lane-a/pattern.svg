@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Forged Landscapes heritage pattern tile">
+  <style>
+    .bg{fill:var(--ground,#0B3D2E)}
+    .l{fill:none;stroke:var(--accent,#B08D4A);stroke-width:1;opacity:0.5}
+    .d{fill:var(--accent,#B08D4A);opacity:0.6}
+  </style>
+  <rect class="bg" width="120" height="120"/>
+  <!-- seamless diagonal trellis (edges align on 120 grid) -->
+  <g class="l">
+    <path d="M0 60 L60 0 M60 120 L120 60 M-0 60 L60 120 M60 0 L120 60"/>
+    <path d="M0 0 L120 120 M0 120 L120 0" opacity="0.28"/>
+    <circle cx="60" cy="60" r="13"/>
+    <circle cx="0" cy="0" r="13"/><circle cx="120" cy="0" r="13"/>
+    <circle cx="0" cy="120" r="13"/><circle cx="120" cy="120" r="13"/>
+  </g>
+  <!-- quatrefoil dot accents at nodes -->
+  <g class="d">
+    <circle cx="60" cy="60" r="2.2"/>
+    <circle cx="0" cy="60" r="2.2"/><circle cx="120" cy="60" r="2.2"/>
+    <circle cx="60" cy="0" r="2.2"/><circle cx="60" cy="120" r="2.2"/>
+  </g>
+</svg>

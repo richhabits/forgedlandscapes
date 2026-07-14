@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Forged Landscapes FL monogram">
+  <style>
+    .i{fill:var(--ink,#0B3D2E)}
+    .a{fill:var(--accent,#B08D4A)}
+  </style>
+  <g class="i">
+    <!-- F : stem -->
+    <path d="M40 46 h18 v148 h-18 Z"/>
+    <!-- F top serif -->
+    <path d="M28 44 h42 v6 q-11 2 -13 7 h-16 q-2 -5 -13 -7 Z"/>
+    <!-- F stem foot serif -->
+    <path d="M30 194 h38 v7 h-38 Z"/>
+    <!-- F top arm + terminal serif -->
+    <path d="M58 50 h56 v8 h-56 Z"/>
+    <path d="M108 46 h10 v16 h-10 Z"/>
+    <!-- F middle arm, extended to interlock with the L stem -->
+    <path d="M58 112 h74 v8 h-74 Z"/>
+
+    <!-- L : stem -->
+    <path d="M132 46 h18 v148 h-18 Z"/>
+    <!-- L top serif -->
+    <path d="M120 44 h42 v6 q-11 2 -13 7 h-16 q-2 -5 -13 -7 Z"/>
+    <!-- L foot + terminal serifs -->
+    <path d="M124 186 h78 v9 h-78 Z"/>
+    <path d="M194 180 h10 v18 h-10 Z"/>
+    <path d="M120 194 h30 v7 h-30 Z"/>
+  </g>
+  <!-- restrained gold hairline beneath the foot -->
+  <path class="a" d="M28 210 h176 v1.6 h-176 Z" opacity="0.8"/>
+</svg>

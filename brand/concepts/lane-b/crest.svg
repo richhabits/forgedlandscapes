@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Forged Landscapes maison crest">
+  <style>
+    .g{fill:var(--ground,#0E3B2E)}
+    .ox{fill:var(--oxblood,#5C1F1F)}
+    .i{fill:var(--ink,#F2EAD8)}
+    .s{fill:none;stroke:var(--ink,#F2EAD8);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .a{fill:none;stroke:var(--accent,#C9A24B);stroke-width:1.4}
+    .af{fill:var(--accent,#C9A24B)}
+    .t{fill:var(--ink,#F2EAD8);font-family:'Cinzel','Marcellus','Bodoni 72',Didot,'Times New Roman',serif;text-anchor:middle}
+  </style>
+
+  <!-- cartouche panel with scrolled top/bottom -->
+  <path class="g" d="M84 96
+    Q200 74 316 96
+    Q332 130 330 200 L330 300
+    Q332 372 316 408
+    Q200 430 84 408
+    Q68 372 70 300 L70 200
+    Q68 130 84 96 Z"/>
+  <path class="a" d="M84 96 Q200 74 316 96 Q332 130 330 200 L330 300 Q332 372 316 408 Q200 430 84 408 Q68 372 70 300 L70 200 Q68 130 84 96 Z"/>
+  <path class="s" d="M98 112 Q200 94 302 112 Q316 140 314 200 L314 300 Q316 360 302 392 Q200 410 98 392 Q84 360 86 300 L86 200 Q84 140 98 112 Z" stroke-width="1.1" opacity="0.85"/>
+
+  <!-- top & bottom ornamental cartouche scrolls -->
+  <g class="af">
+    <path d="M188 82 q12 -12 24 0 q-12 -6 -24 0 Z"/>
+    <path d="M188 420 q12 12 24 0 q-12 6 -24 0 Z"/>
+  </g>
+
+  <text class="t" x="200" y="140" font-size="17" letter-spacing="6">EST. 2026</text>
+
+  <!-- mirrored botanical flourishes -->
+  <g class="s" stroke-width="1.8" opacity="0.9">
+    <path d="M118 250 q-18 22 -6 52 q-14 -14 -10 -34"/>
+    <path d="M282 250 q18 22 6 52 q14 -14 10 -34"/>
+  </g>
+
+  <!-- crossed hammer + anvil, jewellery weight -->
+  <g>
+    <!-- hammer behind, diagonal -->
+    <g class="i">
+      <rect x="150" y="188" width="14" height="96" rx="3" transform="rotate(38 157 236)"/>
+      <path d="M196 176 l30 16 -10 18 -30 -16 Z"/>
+    </g>
+    <!-- anvil in front -->
+    <g class="ox">
+      <path d="M158 214 h84 v16 h-14 l-8 8 h-18 l-8 -8 h-8 Z"/>
+      <path d="M158 217 l-16 5 16 4 Z"/>
+      <path d="M186 238 h28 l-6 26 h-16 Z"/>
+      <path d="M168 264 h64 l7 16 h-78 Z"/>
+    </g>
+    <path class="a" d="M158 214 h84 v16 h-14 l-8 8 h-18 l-8 -8 h-8 Z" stroke-width="1"/>
+  </g>
+
+  <!-- oxblood motto ribbon -->
+  <g>
+    <path class="ox" d="M96 330 L304 330 L296 366 L104 366 Z"/>
+    <path class="a" d="M96 330 L304 330 L296 366 L104 366 Z"/>
+    <path class="ox" d="M72 322 L96 330 L104 366 L78 360 Z"/>
+    <path class="ox" d="M328 322 L304 330 L296 366 L322 360 Z"/>
+    <text class="t" x="200" y="355" font-size="21" letter-spacing="5" font-weight="600">FORGED PROPERLY</text>
+  </g>
+
+  <text class="t" x="200" y="470" font-size="13" letter-spacing="5" opacity="0.92">WATFORD · HERTFORDSHIRE</text>
+</svg>

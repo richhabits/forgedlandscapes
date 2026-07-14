@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Forged Landscapes FL monogram">
+  <style>
+    .i{fill:var(--ink,#232323)}
+    .a{fill:none;stroke:var(--accent,#232323);stroke-width:1.5}
+    .af{fill:var(--accent,#232323)}
+  </style>
+  <!-- ornamental diamond frame -->
+  <path class="a" d="M120 22 L214 120 L120 218 L26 120 Z"/>
+  <path class="a" d="M120 36 L200 120 L120 204 L40 120 Z" stroke-width="0.8" opacity="0.65"/>
+  <path class="af" d="M120 16 l4 6 -4 6 -4 -6 Z"/>
+  <path class="af" d="M120 200 l4 6 -4 6 -4 -6 Z"/>
+
+  <g class="i">
+    <!-- F stem -->
+    <path d="M62 60 h16 v120 h-16 Z"/>
+    <path d="M52 58 h36 v6 q-9 2 -11 6 h-14 q-2 -4 -11 -6 Z"/>
+    <!-- F top arm with swash terminal -->
+    <path d="M78 64 h44 q11 0 13 -8 q4 12 -9 14 h-48 Z"/>
+    <!-- F mid arm, reaching to interlock with L stem -->
+    <path d="M78 114 h50 v8 h-50 Z"/>
+
+    <!-- L stem -->
+    <path d="M128 60 h16 v120 h-16 Z"/>
+    <path d="M118 58 h36 v6 q-9 2 -11 6 h-14 q-2 -4 -11 -6 Z"/>
+    <!-- L foot with swash terminal -->
+    <path d="M128 172 h48 q12 0 14 -8 q4 13 -10 15 h-66 Z"/>
+    <path d="M116 172 h28 v8 h-28 Z"/>
+  </g>
+</svg>

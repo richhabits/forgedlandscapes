@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" role="img" aria-label="Forged Landscapes wordmark">
+  <style>
+    .t{fill:var(--ink,#0B3D2E);font-family:'Cormorant Garamond','EB Garamond',Garamond,'Times New Roman',serif;text-anchor:middle}
+    .a{stroke:var(--accent,#B08D4A);fill:var(--accent,#B08D4A)}
+  </style>
+  <text class="t" x="360" y="88" font-size="62" letter-spacing="14" font-weight="500">FORGED</text>
+  <!-- centre rule with diamond -->
+  <line class="a" x1="150" y1="118" x2="330" y2="118" stroke-width="1"/>
+  <line class="a" x1="390" y1="118" x2="570" y2="118" stroke-width="1"/>
+  <path class="a" d="M360 111 l7 7 -7 7 -7 -7 Z"/>
+  <text class="t" x="360" y="164" font-size="34" letter-spacing="26" font-weight="500">LANDSCAPES</text>
+</svg>

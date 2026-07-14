@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Forged Landscapes heritage crest">
+  <style>
+    .g{fill:var(--ground,#F5F0E6)}
+    .i{fill:var(--ink,#F5F0E6)}
+    .s{fill:none;stroke:var(--ink,#F5F0E6);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+    .a{fill:none;stroke:var(--accent,#F5F0E6);stroke-width:1.6}
+    .af{fill:var(--accent,#F5F0E6)}
+    .t{fill:var(--ink,#F5F0E6);font-family:'Cormorant Garamond','EB Garamond',Garamond,'Times New Roman',serif;text-anchor:middle}
+  </style>
+
+  <!-- shield ground + double keyline -->
+  <path class="g" d="M70 66 L330 66 L330 236 Q330 372 200 452 Q70 372 70 236 Z"/>
+  <path class="a" d="M70 66 L330 66 L330 236 Q330 372 200 452 Q70 372 70 236 Z"/>
+  <path class="a" d="M82 80 L318 80 L318 234 Q318 360 200 434 Q82 360 82 234 Z" stroke-width="0.9" opacity="0.8"/>
+
+  <!-- chief band with EST -->
+  <line class="a" x1="82" y1="120" x2="318" y2="120" stroke-width="0.9" opacity="0.7"/>
+  <text class="t" x="200" y="106" font-size="20" letter-spacing="8">EST. 2026</text>
+
+  <!-- laurel supporters, mirrored -->
+  <g class="s" stroke-width="2">
+    <path d="M120 250 Q98 300 116 356"/>
+    <g class="i">
+      <ellipse cx="108" cy="266" rx="10" ry="4.6" transform="rotate(-46 108 266)"/>
+      <ellipse cx="102" cy="288" rx="11" ry="5" transform="rotate(-30 102 288)"/>
+      <ellipse cx="101" cy="312" rx="11" ry="5" transform="rotate(-14 101 312)"/>
+      <ellipse cx="105" cy="336" rx="10" ry="4.6" transform="rotate(6 105 336)"/>
+    </g>
+  </g>
+  <g class="s" stroke-width="2">
+    <path d="M280 250 Q302 300 284 356"/>
+    <g class="i">
+      <ellipse cx="292" cy="266" rx="10" ry="4.6" transform="rotate(46 292 266)"/>
+      <ellipse cx="298" cy="288" rx="11" ry="5" transform="rotate(30 298 288)"/>
+      <ellipse cx="299" cy="312" rx="11" ry="5" transform="rotate(14 299 312)"/>
+      <ellipse cx="295" cy="336" rx="10" ry="4.6" transform="rotate(-6 295 336)"/>
+    </g>
+  </g>
+
+  <!-- anvil, heraldic -->
+  <g class="i">
+    <!-- face + horn -->
+    <path d="M158 172 L246 172 L246 190 L226 190 L214 200 L186 200 L172 190 L158 190 Z"/>
+    <path d="M158 176 L128 184 L158 190 Z"/>
+    <!-- waist -->
+    <path d="M186 200 L214 200 L208 232 L192 232 Z"/>
+    <!-- foot -->
+    <path d="M166 232 L234 232 L242 254 L158 254 Z"/>
+  </g>
+  <!-- single forge spark above -->
+  <g class="af">
+    <path d="M200 150 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z"/>
+  </g>
+
+  <!-- motto ribbon -->
+  <g>
+    <path class="g" d="M52 300 L96 288 L96 322 L52 334 Z"/>
+    <path class="g" d="M348 300 L304 288 L304 322 L348 334 Z"/>
+    <path class="af" d="M52 300 L96 288 L96 292 L58 302 Z" opacity="0.9"/>
+    <path class="af" d="M348 300 L304 288 L304 292 L342 302 Z" opacity="0.9"/>
+    <path class="g" d="M92 286 L308 286 L308 330 L92 330 Z"/>
+    <path class="a" d="M92 286 L308 286 L308 330 L92 330 Z" stroke-width="1.4"/>
+    <text class="t" x="200" y="316" font-size="18" letter-spacing="3" font-weight="600">FORGED PROPERLY</text>
+  </g>
+
+  <!-- locale line -->
+  <text class="t" x="200" y="484" font-size="14" letter-spacing="6" opacity="0.92">WATFORD · HERTFORDSHIRE</text>
+</svg>

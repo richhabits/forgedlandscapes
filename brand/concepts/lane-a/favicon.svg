@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Forged Landscapes favicon">
+  <style>
+    .g{fill:var(--ground,#0B3D2E)}
+    .i{fill:var(--ink,#F5F0E6)}
+  </style>
+  <rect class="g" width="64" height="64" rx="12"/>
+  <!-- radically simplified bold anvil: reads at 16px -->
+  <g class="i">
+    <path d="M16 22 h30 v9 h-8 l-5 5 h-10 l-5 -5 h-2 Z"/>
+    <path d="M16 23 l-6 3 6 3 Z"/>
+    <path d="M27 36 h10 l-3 8 h-4 Z"/>
+    <path d="M22 44 h20 l4 8 h-28 Z"/>
+  </g>
+</svg>
