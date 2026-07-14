@@ -32,7 +32,7 @@ export const site = {
   //   wasteCarrier: "Environment Agency registered waste carrier — CBDUxxxxxx",
   trust: {
     guarantee: "5-year workmanship guarantee on all hard landscaping",
-    payments: "Staged payments — never full payment up front",
+    payments: "No big deposit — pay in funded phases as work is agreed",
   },
 
   // Industry affiliations — none held yet, so intentionally empty and the
@@ -58,5 +58,6 @@ export const nav = [
   { href: "/decking-pergolas", label: "Decking & Pergolas" },
   { href: "/lawns-planting", label: "Lawns & Planting" },
   { href: "/garden-design", label: "Garden Design" },
+  { href: "/garden-clearance", label: "Clearance" },
   { href: "/areas", label: "Areas" },
 ] as const;

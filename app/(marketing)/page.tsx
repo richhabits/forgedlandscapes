@@ -36,8 +36,16 @@ const homeFaqs = [
     a: "Quotes are itemised and fixed against a written specification after survey. Guide prices on each service page show where projects typically land. Payments are staged — never full payment up front.",
   },
   {
+    q: "Do you need a big deposit up front?",
+    a: "No. Rather than a large upfront deposit, we break the work into funded phases — you pay for each phase as it's agreed and started, so you're never far out of pocket ahead of the work. Materials are only ordered once a phase is confirmed.",
+  },
+  {
+    q: "What if I need to pause the project partway?",
+    a: "Life happens. If you pause between phases, we leave the site safe, clean and presentable — surfaces made good, no hazardous half-built mess — and pick up again when you're ready. You're never left living on a building site.",
+  },
+  {
     q: "Who actually does the work?",
-    a: "Our own teams, run by a project lead you can phone. Construction-phase health and safety is managed under CDM 2015 on every job, and workmanship carries a 5-year guarantee.",
+    a: "Our own teams, run by a project lead you can phone. They turn up uniformed and tidy, keep the site clean, and manage construction-phase health and safety under CDM 2015 on every job. Workmanship carries a 5-year guarantee.",
   },
 ];
 
@@ -113,6 +121,14 @@ export default function HomePage() {
               the part you'll <em className="display-italic text-brass-300">never see</em> like
               it's the part you'll show off.
             </h2>
+            <p className="mt-7 text-[15px] text-stone-400 leading-relaxed max-w-xl">
+              That discipline comes from an unusual place. Our background is in
+              building film and television sets — where a space has to look
+              flawless <em className="display-italic text-brass-200">and</em> stand up to a schedule
+              that doesn't move. We bring the same precision, planning and site
+              logistics to gardens: measured, methodical, and finished to be
+              looked at.
+            </p>
           </Reveal>
           <div className="lg:col-span-4 lg:col-start-9 flex flex-col justify-end gap-8">
             <Reveal delay={100}>
@@ -142,13 +158,13 @@ export default function HomePage() {
       {/* ————— SERVICES INDEX ————— */}
       <section className="mx-auto max-w-7xl px-5 md:px-10 py-24 md:py-28">
         <SectionHead
-          label="Services — 01 to 05"
+          label="Services — 01 to 06"
           title={
             <>
-              Five disciplines. <em className="display-italic text-brass-300">One</em> standard.
+              Six disciplines. <em className="display-italic text-brass-300">One</em> standard.
             </>
           }
-          intro="Every discipline is delivered design-first: measured, drawn and priced as a fixed itemised quote before a spade goes in."
+          intro="From a first clearance to a full redesign, every discipline is delivered design-first: measured, drawn and priced as a fixed itemised quote before a spade goes in."
         />
         <div className="mt-14">
           <ServiceIndex />
@@ -221,9 +237,9 @@ export default function HomePage() {
             {[
               ["Brief", "Five minutes in the client portal — photos, rough dimensions, a sketch if you like."],
               ["Survey", "A measured visit with material samples in hand, booked around you."],
-              ["Design & quote", "Scaled plan plus a fixed, itemised cost. No day-rate roulette."],
-              ["Build", "Our own team, a named lead, tidy site discipline, staged payments."],
-              ["Aftercare", "Snag-free handover, care guide, and a 5-year guarantee we're close enough to honour."],
+              ["Design & quote", "Scaled plan plus a fixed, itemised cost, usually back within a couple of working days. No day-rate roulette."],
+              ["Build", "Our own team, a named lead, tidy site discipline, and no big deposit — you pay phase by phase."],
+              ["Aftercare", "Snag-free handover, a care guide, an optional maintenance plan, and a 5-year guarantee we're close enough to honour."],
             ].map(([t, d], i) => (
               <Reveal key={t} delay={i * 60} className="flex gap-5 py-5 border-b rule">
                 <span className="index-num text-lg shrink-0 w-8">{`0${i + 1}`}</span>

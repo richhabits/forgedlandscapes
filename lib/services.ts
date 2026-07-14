@@ -190,6 +190,37 @@ export const services: Service[] = [
     metaDescription:
       "Full garden design and build in Watford & Hertfordshire: measured survey, scaled design, fixed itemised cost, one team from groundworks to planting.",
   },
+  {
+    slug: "garden-clearance",
+    index: "06",
+    title: "Garden Clearance",
+    navLabel: "Garden Clearance",
+    strap: "Overgrown, tired or cluttered — stripped back to a clean, level canvas",
+    heroKey: "wildBefore",
+    intro: [
+      "Every good garden starts from zero. Overgrown borders, self-set trees, tired decking, a slab pile the last lot left behind — we strip it back to a clean, level plot, cleared and carted away, so you can actually see what you're working with.",
+      "It's the honest first step, and often the quickest way to fall back in love with a space. Plenty of clients stop here with a tidy blank canvas; others ask us to design and build it from there. There's no obligation to go further — but the site is left ready if you do.",
+    ],
+    materials: [
+      { name: "Strip-out", detail: "Overgrowth, brambles, self-set trees, old turf, redundant structures and rubble — cleared by hand and machine as access allows." },
+      { name: "Levelling & grading", detail: "The plot graded back to a workable, walkable level, ready to design on or seed over." },
+      { name: "Site protection", detail: "Access routes boarded, existing surfaces and boundaries protected. We leave it tidier than we found it." },
+      { name: "Waste & haulage", detail: "Green waste, spoil and old materials cleared, loaded and removed — disposed of responsibly, nothing left for you to deal with." },
+    ],
+    prices: [
+      { item: "Garden clearance & haulage", guide: "priced on size, access & volume" },
+      { item: "Overgrowth & bramble strip-out", guide: "from a half-day" },
+      { item: "Full site reset — strip, level, grade", guide: "fixed quote after a quick look" },
+    ],
+    faqs: [
+      { q: "Do I have to commit to a full design afterwards?", a: "Not at all. Clearance is a standalone job with its own fixed price. Plenty of clients just want the space tamed and tidy. If you do want it designed and built from there, we've already got a head start — but there's never any pressure." },
+      { q: "What happens to all the waste?", a: "We clear it, load it and take it away — green waste, spoil and any old materials — and dispose of it responsibly. You're not left with skips lingering or a pile at the side of the house." },
+      { q: "How quickly can you clear a garden?", a: "Most domestic clearances run one to three days depending on how overgrown it is and how easy the access. You'll get a fixed price and a firm date, not an open-ended day rate." },
+    ],
+    galleryKeys: ["craftSoil", "craftEdging", "redesignModern"],
+    metaDescription:
+      "Garden and site clearance in Watford & Hertfordshire: overgrown gardens stripped back, levelled and cleared to a clean canvas, all waste taken away. Fixed price, no obligation.",
+  },
 ];
 
 export const serviceBySlug = (slug: string) =>

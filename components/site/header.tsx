@@ -65,7 +65,7 @@ export function Header() {
       >
         <Wordmark size="md" />
 
-        <nav className="hidden lg:flex items-center gap-7" aria-label="Primary">
+        <nav className="hidden lg:flex items-center gap-x-5 xl:gap-x-7" aria-label="Primary">
           {nav.map((item) => (
             <Link
               key={item.href}
