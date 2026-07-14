@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendAdminLeadAlert } from "@/lib/email";
+import { getApiAdmin } from "@/lib/admin-auth";
 import { hit, clientIp } from "@/lib/rate-limit";
 import { site } from "@/lib/site-config";
 
@@ -7,13 +8,16 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Email configuration health check — used to diagnose deliverability without
- * spamming the leads table. Reveals only booleans and the (non-secret) from/to
- * addresses; never the key itself. `?send=1` fires ONE diagnostic email to the
- * admin's own inbox (rate-limited) and returns the real Resend result, so a
- * silent "skipped: key not set" or a Resend error becomes visible.
+ * Email configuration health check — diagnoses deliverability without spamming
+ * the leads table. ADMIN ONLY: reveals config booleans and can fire a probe to
+ * the admin's own inbox, so it must not be public. `?send=1` sends ONE
+ * rate-limited diagnostic email and returns the real Resend result, making a
+ * silent "skipped: key not set" or a Resend error visible.
  */
 export async function GET(req: Request) {
+  const admin = await getApiAdmin();
+  if (!admin) return NextResponse.json({ ok: false }, { status: 403 });
+
   const url = new URL(req.url);
   const doSend = url.searchParams.get("send") === "1";
 
