@@ -26,21 +26,26 @@ export default function OpengraphImage() {
           position: "relative",
         }}
       >
-        {/* top rule + label */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ width: 56, height: 2, background: "#b08a49" }} />
-            <div
-              style={{
-                color: "#a89f8c",
-                fontSize: 22,
-                letterSpacing: 6,
-                textTransform: "uppercase",
-                fontFamily: "Arial, sans-serif",
-              }}
-            >
-              Watford · Hertfordshire · 20-mile radius
-            </div>
+        {/* anvil mark + top rule + label */}
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <svg width="60" height="60" viewBox="0 0 40 40">
+            <path d="M20 3 l1.4 3.6 3.6 1.4 -3.6 1.4 -1.4 3.6 -1.4 -3.6 -3.6 -1.4 3.6 -1.4 Z" fill="#b08a49" />
+            <path d="M8 15 h24 v6 h-6 l-4 4 h-8 l-4 -4 h-2 Z" fill="#f4efe4" />
+            <path d="M8 16 l-5 2.5 5 2.5 Z" fill="#f4efe4" />
+            <path d="M17 25 h6 l-2 8 h-2 Z" fill="#f4efe4" />
+            <path d="M12 33 h16 l3 5 h-22 Z" fill="#f4efe4" />
+          </svg>
+          <div style={{ width: 56, height: 2, background: "#b08a49" }} />
+          <div
+            style={{
+              color: "#a89f8c",
+              fontSize: 22,
+              letterSpacing: 6,
+              textTransform: "uppercase",
+              fontFamily: "Arial, sans-serif",
+            }}
+          >
+            Watford · Hertfordshire · 20-mile radius
           </div>
         </div>
 

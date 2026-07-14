@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="6" fill="#10140f"/>
-  <text x="32" y="41" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-style="italic" fill="#ede6d6" text-anchor="middle">F</text>
-  <rect x="18" y="47" width="28" height="2.5" fill="#b08a49"/>
+  <!-- forged anvil — reads at 16px -->
+  <g fill="#ede6d6">
+    <path d="M16 22 h30 v9 h-8 l-5 5 h-10 l-5 -5 h-2 Z"/>
+    <path d="M16 23 l-6 3 6 3 Z"/>
+    <path d="M27 36 h10 l-3 8 h-4 Z"/>
+    <path d="M22 44 h20 l4 8 h-28 Z"/>
+  </g>
+  <rect x="18" y="55" width="28" height="2" fill="#b08a49"/>
 </svg>

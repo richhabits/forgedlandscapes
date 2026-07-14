@@ -1,0 +1,23 @@
+/* Forged Landscapes — brand colour tokens.
+   These align with the live site's existing forge / brass / bone scale,
+   so the identity and the site are one system. */
+:root {
+  /* greens */
+  --fl-forge-950: #10140f;   /* near-black forge green — deepest ground (matches site) */
+  --fl-racing:    #0B3D2E;   /* racing green — primary crest ground */
+  --fl-forge-900: #16241b;   /* raised panels */
+
+  /* ink / paper */
+  --fl-ivory:     #F5F0E6;   /* primary light ink & paper */
+  --fl-bone:      #ede6d6;   /* site bone (interchangeable with ivory) */
+  --fl-charcoal:  #232323;   /* mono dark ink on white */
+
+  /* metal — used ONLY as fine accent, never large fills */
+  --fl-gold:      #B08D4A;   /* aged gold / brass accent (≈ site brass) */
+
+  /* the four official colourways (ink · ground) */
+  --cw-full:      var(--fl-ivory);   /* + racing/forge ground */
+  --cw-gold:      var(--fl-gold);    /* + racing/forge ground */
+  --cw-charcoal:  var(--fl-charcoal);/* + white ground */
+  --cw-ivory:     var(--fl-ivory);   /* + forge-950 ground */
+}

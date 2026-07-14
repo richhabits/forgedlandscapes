@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Forged Landscapes roundel seal">
+  <style>
+    .g{fill:var(--ground,#F5F0E6)}
+    .i{fill:var(--ink,#F5F0E6)}
+    .ring{fill:none;stroke:var(--ink,#F5F0E6);stroke-width:2}
+    .a{fill:none;stroke:var(--accent,#F5F0E6);stroke-width:1}
+    .t{fill:var(--ink,#F5F0E6);font-family:'Cormorant Garamond','EB Garamond',Garamond,serif;font-size:15px;letter-spacing:3px}
+  </style>
+  <circle class="g" cx="120" cy="120" r="118"/>
+  <circle class="ring" cx="120" cy="120" r="115"/>
+  <circle class="a" cx="120" cy="120" r="108"/>
+  <circle class="ring" cx="120" cy="120" r="78" stroke-width="1.2"/>
+
+  <defs>
+    <path id="top" d="M120 27 a93 93 0 0 1 0 186" fill="none"/>
+    <path id="bot" d="M120 213 a93 93 0 0 1 0 -186" fill="none"/>
+  </defs>
+  <text class="t"><textPath href="#top" startOffset="50%" text-anchor="middle">FORGED · LANDSCAPES</textPath></text>
+  <text class="t"><textPath href="#bot" startOffset="50%" text-anchor="middle">WATFORD · HERTFORDSHIRE</textPath></text>
+
+  <!-- separator diamonds -->
+  <path class="i" d="M31 120 l5 5 -5 5 -5 -5 Z"/>
+  <path class="i" d="M209 120 l5 5 -5 5 -5 -5 Z"/>
+
+  <!-- central anvil, bolder for small-size legibility -->
+  <g class="i">
+    <path d="M92 104 h56 v14 h-15 l-9 8 h-18 l-9 -8 h-11 Z"/>
+    <path d="M92 106 l-16 5 16 4 Z"/>
+    <path d="M112 126 h16 l-4 22 h-8 Z"/>
+    <path d="M100 148 h40 l5 14 h-50 Z"/>
+  </g>
+  <text class="t" x="120" y="92" text-anchor="middle" font-size="12" letter-spacing="4">EST. 2026</text>
+</svg>
