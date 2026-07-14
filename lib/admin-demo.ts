@@ -163,10 +163,10 @@ export const demoProjects: Record<string, ProjectDetail> = {
     access_notes: "Side gate 0.9m wide, shared drive — skip must go on the road with a permit.",
     inspirationLinks: ["https://www.pinterest.co.uk/search/pins/?q=louvred%20pergola%20deck", "https://www.instagram.com/explore/tags/compositedecking/"],
     media: [
-      { id: "m1", kind: "garden_photo", caption: "From the house looking out", signedUrl: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1200&q=70", externalUrl: null },
-      { id: "m2", kind: "garden_photo", caption: "The level change", signedUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=70", externalUrl: null },
+      { id: "m1", kind: "garden_photo", caption: "From the house looking out", signedUrl: "/images/concepts/patio-dining.jpg", externalUrl: null },
+      { id: "m2", kind: "garden_photo", caption: "The level change", signedUrl: "/images/concepts/redesign-after.jpg", externalUrl: null },
       { id: "m3", kind: "sketch_canvas", caption: "Layout sketch", signedUrl: SKETCH_SVG, externalUrl: null },
-      { id: "m4", kind: "inspiration", caption: "Reference — louvred roof", signedUrl: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=70", externalUrl: null },
+      { id: "m4", kind: "inspiration", caption: "Reference — louvred roof", signedUrl: "/images/concepts/pergola-louvre.jpg", externalUrl: null },
     ],
   },
 };

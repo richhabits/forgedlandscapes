@@ -11,7 +11,7 @@ const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://challenges.cloudflare.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co https://basemaps.cartocdn.com https://*.basemaps.cartocdn.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
+  "img-src 'self' data: blob: https://*.supabase.co https://basemaps.cartocdn.com https://*.basemaps.cartocdn.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self' data:",
   "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.postcodes.io https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com",
   "media-src 'self' blob: https://*.supabase.co",
@@ -35,9 +35,8 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      // Curated photographic comps (see lib/images.ts) — swap for real
-      // project photography over time; Supabase storage for portal media.
-      { protocol: "https", hostname: "images.unsplash.com" },
+      // Site imagery is now self-hosted under /public/images (see lib/images.ts).
+      // Supabase storage remains for real portal/project media uploads.
       { protocol: "https", hostname: "*.supabase.co" },
     ],
   },
