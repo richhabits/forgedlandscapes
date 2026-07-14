@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Forged Landscapes maison pattern tile">
+  <style>
+    .bg{fill:var(--ground,#0E3B2E)}
+    .l{fill:none;stroke:var(--accent,#C9A24B);stroke-width:1.1;opacity:0.55}
+    .d{fill:var(--accent,#C9A24B);opacity:0.65}
+  </style>
+  <rect class="bg" width="120" height="120"/>
+  <!-- seamless ornamental gate-ironwork arcs (tile on 120 grid) -->
+  <g class="l">
+    <path d="M0 60 Q30 30 60 60 Q90 90 120 60"/>
+    <path d="M0 60 Q30 90 60 60 Q90 30 120 60"/>
+    <path d="M60 0 Q30 30 60 60 Q90 30 60 0"/>
+    <path d="M60 120 Q30 90 60 60 Q90 90 60 120"/>
+    <path d="M0 0 Q30 30 0 60 M120 0 Q90 30 120 60 M0 120 Q30 90 0 60 M120 120 Q90 90 120 60"/>
+  </g>
+  <g class="d">
+    <circle cx="60" cy="60" r="2.6"/>
+    <circle cx="0" cy="60" r="2.6"/><circle cx="120" cy="60" r="2.6"/>
+    <circle cx="60" cy="0" r="2.6"/><circle cx="60" cy="120" r="2.6"/>
+    <circle cx="0" cy="0" r="2.6"/><circle cx="120" cy="0" r="2.6"/>
+    <circle cx="0" cy="120" r="2.6"/><circle cx="120" cy="120" r="2.6"/>
+  </g>
+</svg>

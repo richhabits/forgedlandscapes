@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" role="img" aria-label="Forged Landscapes wordmark">
+  <style>
+    .t{fill:var(--ink,#0E3B2E);font-family:'Cinzel','Marcellus','Bodoni 72',Didot,'Times New Roman',serif;text-anchor:middle}
+    .a{stroke:var(--accent,#C9A24B);fill:var(--accent,#C9A24B)}
+  </style>
+  <text class="t" x="360" y="82" font-size="52" letter-spacing="16" font-weight="600">FORGED</text>
+  <!-- fleuron rule -->
+  <line class="a" x1="170" y1="112" x2="320" y2="112" stroke-width="0.9"/>
+  <line class="a" x1="400" y1="112" x2="550" y2="112" stroke-width="0.9"/>
+  <g class="a">
+    <circle cx="360" cy="112" r="3.2" fill="none" stroke-width="1"/>
+    <path d="M349 112 q11 -9 11 0 q0 -9 11 0 q-11 9 -11 0 q0 9 -11 0 Z" stroke-width="0.8"/>
+  </g>
+  <text class="t" x="360" y="160" font-size="30" letter-spacing="28" font-weight="500">LANDSCAPES</text>
+</svg>
